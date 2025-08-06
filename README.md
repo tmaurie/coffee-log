@@ -13,8 +13,8 @@
 - [x] /tests (listing)
 - [x] /tests/[id] (détail)
 - [x] /new-test (ajout test)
-- [x] /cafes (listing)
-- [ ] /machines (listing)
+- [x] /coffees (listing)
+- [x] /machines (listing)
 - [ ] /favorites (filtre tests favoris)
 
 ### 🖌️ Composants réutilisables
