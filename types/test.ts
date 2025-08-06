@@ -7,6 +7,7 @@ export type Test = {
     quantity: number;     // ml
     temperature: number;  // °C
     pressure: number;     // bar
+    grindSize: string;    // fin, moyen, gros
     intensity: number;    // 1-5
     bitterness: number;   // 1-5
     acidity: number;      // 1-5
