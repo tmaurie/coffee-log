@@ -2,6 +2,7 @@ import './globals.css';
 import type {Metadata} from 'next';
 import {CafeLogProvider} from '@/context/CoffeeLogContext';
 import Header from '@/components/header';
+import BottomNav from "@/components/bottom-nav";
 
 export const metadata: Metadata = {
     title: 'CaféLog',
@@ -15,6 +16,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <CafeLogProvider>
             <Header/>
             <div className="pt-6 pb-12">{children}</div>
+            <BottomNav />
         </CafeLogProvider>
         </body>
         </html>
