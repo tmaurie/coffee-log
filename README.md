@@ -15,7 +15,7 @@
 - [x] /new-test (ajout test)
 - [x] /coffees (listing)
 - [x] /machines (listing)
-- [ ] /favorites (filtre tests favoris)
+- [x] /favorites (filtre tests favoris)
 
 ### 🖌️ Composants réutilisables
 - [x] Card test
