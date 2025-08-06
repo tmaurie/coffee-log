@@ -12,10 +12,10 @@
 - [x] Accueil/dashboard
 - [x] /tests (listing)
 - [x] /tests/[id] (détail)
-- [ ] /new-test (ajout test)
-- [ ] /cafes (listing)
+- [x] /new-test (ajout test)
+- [x] /cafes (listing)
 - [ ] /machines (listing)
-- [ ] /favoris (filtre tests favoris)
+- [ ] /favorites (filtre tests favoris)
 
 ### 🖌️ Composants réutilisables
 - [x] Card test

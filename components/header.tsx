@@ -23,7 +23,7 @@ export default function Header() {
                             Tests
                         </Button>
                     </Link>
-                    <Link href="/cafes">
+                    <Link href="/coffees">
                         <Button variant="ghost" className="text-md font-medium">
                             Cafés
                         </Button>
@@ -33,7 +33,7 @@ export default function Header() {
                             Machines
                         </Button>
                     </Link>
-                    <Link href="/favoris">
+                    <Link href="/favorites">
                         <Button variant="ghost" className="text-md font-medium">
                             Favoris
                         </Button>

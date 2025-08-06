@@ -4,10 +4,10 @@ import Link from "next/link";
 import {Coffee, FlaskConical, PlusCircle, Settings2, Star} from "lucide-react";
 
 const items = [
-    {href: "/cafes", label: "Cafés", icon: <Coffee className="w-5 h-5"/>},
+    {href: "/coffees", label: "Cafés", icon: <Coffee className="w-5 h-5"/>},
     {href: "/tests", label: "Tests", icon: <FlaskConical className="w-5 h-5"/>},
     {href: "/machines", label: "Machines", icon: <Settings2 className="w-5 h-5"/>},
-    {href: "/favoris", label: "Favoris", icon: <Star className="w-5 h-5"/>},
+    {href: "/favorites", label: "Favoris", icon: <Star className="w-5 h-5"/>},
 ];
 
 export default function BottomNav() {

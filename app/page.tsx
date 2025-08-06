@@ -74,7 +74,7 @@ export default function Home() {
                             </CardContent>
                         </Card>
                     </Link>
-                    <Link href="/cafes">
+                    <Link href="/coffees">
                         <Card className="hover:shadow-md cursor-pointer">
                             <CardContent className="flex flex-col items-center justify-center p-4">
                                 <Coffee className="text-2xl mb-2 text-amber-800" />
@@ -90,7 +90,7 @@ export default function Home() {
                             </CardContent>
                         </Card>
                     </Link>
-                    <Link href="/favoris">
+                    <Link href="/favorites">
                         <Card className="hover:shadow-md cursor-pointer">
                             <CardContent className="flex flex-col items-center justify-center p-4">
                                 <Star className="text-2xl mb-2 text-yellow-500" />
