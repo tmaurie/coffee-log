@@ -31,7 +31,6 @@ export default function BottomNav() {
                 href="/new-test"
                 className="relative -top-6 bg-amber-600 hover:bg-amber-700 text-white rounded-full shadow-lg p-3 border-4 border-white dark:border-zinc-900 flex items-center justify-center transition"
                 aria-label="Ajouter un test"
-                style={{zIndex: 51}}
             >
                 <PlusCircle className="w-7 h-7"/>
             </Link>

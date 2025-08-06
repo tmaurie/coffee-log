@@ -11,7 +11,7 @@
 ### 🏠 Pages principales
 - [x] Accueil/dashboard
 - [x] /tests (listing)
-- [ ] /tests/[id] (détail)
+- [x] /tests/[id] (détail)
 - [ ] /new-test (ajout test)
 - [ ] /cafes (listing)
 - [ ] /machines (listing)
