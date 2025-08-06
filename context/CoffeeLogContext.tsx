@@ -1,43 +1,64 @@
-'use client'
+"use client";
 
-import React, {createContext, useContext, useState, ReactNode} from 'react';
-import {Test} from '@/types/test';
-import {Coffee} from "@/types/coffee";
-import {Machine} from "@/types/machine";
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { Test } from "@/types/test";
+import { Coffee } from "@/types/coffee";
+import { Machine } from "@/types/machine";
 
 type CoffeeLogContext = {
-    tests: Test[];
-    coffees: Coffee[];
-    machines: Machine[];
-    addTest: (test: Test) => void;
+  tests: Test[];
+  coffees: Coffee[];
+  machines: Machine[];
+  addTest: (test: Test) => void;
 };
 
 const CoffeeLogContext = createContext<CoffeeLogContext | undefined>(undefined);
 
-export const CafeLogProvider = ({children}: { children: ReactNode }) => {
-    const [tests, setTests] = useState<Test[]>([]);
-    const [coffees, setCoffees] = useState<Coffee[]>([
-        // Quelques exemples pour démarrer
-        {id: '1', name: 'Ethiopie Moka', origin: 'Éthiopie', description: 'Fruité, floral, très aromatique.'},
-        {id: '2', name: 'Colombia Supremo', origin: 'Colombie', description: 'Rond, doux, équilibré.'},
-    ]);
-    const [machines, setMachines] = useState<Machine[]>([
-        // Quelques exemples pour démarrer
-        { id: '1', name: 'Gaggia Classic', brand: 'Gaggia', description: 'La référence espresso home-barista.' },
-        { id: '2', name: 'Delonghi Magnifica', brand: 'Delonghi', description: 'Machine tout-en-un, très fiable.' },
-    ]);
+export const CafeLogProvider = ({ children }: { children: ReactNode }) => {
+  const [tests, setTests] = useState<Test[]>([]);
+  const [coffees, setCoffees] = useState<Coffee[]>([
+    // Quelques exemples pour démarrer
+    {
+      id: "1",
+      name: "Ethiopie Moka",
+      origin: "Éthiopie",
+      description: "lorem ipsum dolor sit amet.",
+    },
+    {
+      id: "2",
+      name: "Colombia Supremo",
+      origin: "Colombie",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+  ]);
+  const [machines, setMachines] = useState<Machine[]>([
+    // Quelques exemples pour démarrer
+    {
+      id: "1",
+      name: "Gaggia Classic",
+      brand: "Gaggia",
+      description: "Lorem ipsum dolor sit amet.",
+    },
+    {
+      id: "2",
+      name: "Delonghi Magnifica",
+      brand: "Delonghi",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+  ]);
 
-    const addTest = (test: Test) => setTests(tests => [...tests, test]);
+  const addTest = (test: Test) => setTests((tests) => [...tests, test]);
 
-    return (
-        <CoffeeLogContext.Provider value={{tests, coffees, machines, addTest}}>
-            {children}
-        </CoffeeLogContext.Provider>
-    );
+  return (
+    <CoffeeLogContext.Provider value={{ tests, coffees, machines, addTest }}>
+      {children}
+    </CoffeeLogContext.Provider>
+  );
 };
 
 export const useCafeLog = () => {
-    const context = useContext(CoffeeLogContext);
-    if (!context) throw new Error('useCafeLog must be used within a CafeLogProvider');
-    return context;
+  const context = useContext(CoffeeLogContext);
+  if (!context)
+    throw new Error("useCafeLog must be used within a CafeLogProvider");
+  return context;
 };
