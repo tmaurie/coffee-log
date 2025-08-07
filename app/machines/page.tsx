@@ -1,7 +1,7 @@
 "use client";
 
 import { useCafeLog } from "@/context/CoffeeLogContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import InfoCard from "@/components/info-card";
 
 export default function MachinesPage() {
   const { machines } = useCafeLog();
@@ -28,26 +28,12 @@ export default function MachinesPage() {
 
       <div className="grid gap-4">
         {machines?.map((machine) => (
-          <Card key={machine.id} className="transition border">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                {machine.name}
-                {machine.brand && (
-                  <span className="ml-2 text-xs text-gray-500 font-medium">
-                    ({machine.brand})
-                  </span>
-                )}
-              </CardTitle>
-              {machine.description && (
-                <div className="text-xs text-gray-500 mt-1">
-                  {machine.description}
-                </div>
-              )}
-            </CardHeader>
-            <CardContent>
-              {/* Ajoute d'autres infos techniques ici pour V2 (pression, chauffe, etc.) */}
-            </CardContent>
-          </Card>
+          <InfoCard
+            key={machine.id}
+            title={machine.name}
+            subtitle={machine.brand}
+            description={machine.description}
+          />
         ))}
       </div>
     </main>

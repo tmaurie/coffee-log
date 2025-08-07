@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className="min-h-screen bg-amber-50 text-gray-900 dark:bg-zinc-900 dark:text-zinc-100 transition-colors">
+      <body className="min-h-screen bg-amber-50 text-gray-900 dark:bg-zinc-800 dark:text-zinc-100 transition-colors">
         <CafeLogProvider>
           <Header />
           <div className="pt-6 pb-12">{children}</div>

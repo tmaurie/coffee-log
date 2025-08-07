@@ -1,8 +1,7 @@
 "use client";
 
 import { useCafeLog } from "@/context/CoffeeLogContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import InfoCard from "@/components/info-card";
 
 export default function CafesPage() {
   const { coffees } = useCafeLog();
@@ -29,26 +28,13 @@ export default function CafesPage() {
 
       <div className="grid gap-4">
         {coffees?.map((cafe) => (
-          <Card key={cafe.id} className="transition border">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                {cafe.name}
-                {cafe.origin && (
-                  <Badge variant="secondary" className="ml-2">
-                    {cafe.origin}
-                  </Badge>
-                )}
-              </CardTitle>
-              {cafe.description && (
-                <div className="text-xs text-gray-500 mt-1">
-                  {cafe.description}
-                </div>
-              )}
-            </CardHeader>
-            <CardContent>
-              {/* Ajoute d'autres infos si tu veux (notes, type, intensité, etc.) */}
-            </CardContent>
-          </Card>
+          <InfoCard
+            key={cafe.id}
+            title={cafe.name}
+            subtitle={cafe.origin}
+            description={cafe.description}
+            tags={cafe.tags}
+          />
         ))}
       </div>
     </main>
