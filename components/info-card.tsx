@@ -21,21 +21,25 @@ export default function InfoCard({
   return (
     <Card
       onClick={onClick}
-      className={`transition border hover:shadow-md cursor-pointer`}
+      className="transition border hover:shadow-md cursor-pointer"
     >
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">
             {title}
-            {tags &&
-              tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="ml-1 bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-semibold"
-                >
-                  {tag}
-                </span>
-              ))}
+            {tags && tags.length > 0 && (
+              <span role="list" className="flex gap-1">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    role="listitem"
+                    className="ml-1 bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-semibold"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </span>
+            )}
           </CardTitle>
           {right}
         </div>
