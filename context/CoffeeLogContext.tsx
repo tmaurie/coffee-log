@@ -23,12 +23,14 @@ export const CafeLogProvider = ({ children }: { children: ReactNode }) => {
       name: "Ethiopie Moka",
       origin: "Éthiopie",
       description: "lorem ipsum dolor sit amet.",
+      tags: ["floral", "fruité"],
     },
     {
       id: "2",
       name: "Colombia Supremo",
       origin: "Colombie",
       description: "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      tags: ["fruité", "acidulé"],
     },
   ]);
   const [machines, setMachines] = useState<Machine[]>([

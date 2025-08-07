@@ -19,7 +19,7 @@
 
 ### 🖌️ Composants réutilisables
 - [x] Card test
-- [ ] Card café/machine
+- [x] Card café/machine
 - [ ] Badge type boisson
 - [ ] Icônes Lucide
 
