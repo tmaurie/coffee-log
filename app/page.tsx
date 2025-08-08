@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {Coffee, PlusCircle, Star, TestTubeDiagonal, ToolCase} from "lucide-react";
+import { Coffee, PlusCircle, Star, TestTubeDiagonal, ToolCase } from "lucide-react";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
