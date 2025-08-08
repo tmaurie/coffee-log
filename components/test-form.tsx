@@ -19,6 +19,7 @@ import {
 import { Star } from "lucide-react";
 
 type TestFormFields = {
+  id: string; // Optional for initial state, will be set on submit
   date: string;
   cafe: string;
   machine: string;
@@ -36,6 +37,7 @@ type TestFormFields = {
 };
 
 const defaultForm: TestFormFields = {
+  id: uuidv4(), // Generate a unique ID for the test
   date: new Date().toISOString().slice(0, 10),
   cafe: "",
   machine: "",
@@ -76,9 +78,9 @@ export default function TestForm() {
     setForm((prev) => ({ ...prev, favorite: checked }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addTest({ ...form, id: uuidv4() });
+    addTest(form);
     setForm(defaultForm);
     router.push("/tests");
   };

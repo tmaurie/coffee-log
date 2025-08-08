@@ -68,7 +68,7 @@ export default function Home() {
 
       {/* Bouton ajouter un test */}
       <div className="flex justify-center">
-        <Link href="/new-test">
+        <Link href="/tests/new">
           <Button>+ Ajouter un test</Button>
         </Link>
       </div>

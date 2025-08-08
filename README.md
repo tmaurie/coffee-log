@@ -12,7 +12,7 @@
 - [x] Accueil/dashboard
 - [x] /tests (listing)
 - [x] /tests/[id] (détail)
-- [x] /new-test (ajout test)
+- [x] /tests/new (ajout test)
 - [x] /coffees (listing)
 - [x] /machines (listing)
 - [x] /favorites (filtre tests favoris)
