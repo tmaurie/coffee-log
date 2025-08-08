@@ -39,7 +39,8 @@ export const machines = pgTable("machines", {
 });
 
 export const tests = pgTable("tests", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
   date: date("date").notNull(),
   cafe: varchar("cafe", { length: 100 }).notNull(), // id ou nom
   machine: varchar("machine", { length: 100 }).notNull(), // id ou nom
