@@ -12,7 +12,7 @@ export const coffees = pgTable("coffees", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   name: varchar("name", { length: 255 }).notNull(),
   origin: varchar("origin", { length: 255 }),
   description: text("description"),
@@ -23,7 +23,7 @@ export const machines = pgTable("machines", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   name: varchar("name", { length: 255 }).notNull(),
   brand: varchar("brand", { length: 255 }),
   description: text("description"),

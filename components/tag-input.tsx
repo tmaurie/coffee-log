@@ -1,5 +1,5 @@
 "use client";
-import { SetStateAction, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Trash } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge"; // ou remplace par une simple concat
@@ -61,12 +61,12 @@ export default function TagInput({
         <Input
           ref={inputRef}
           value={draft}
-          onChange={(e: { target: { value: SetStateAction<string> } }) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setDraft(e.target.value)
           }
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
-          onBlur={() => addTag(draft)} // ajoute le brouillon en sortant du champ
+          onBlur={() => addTag(draft)}
           placeholder={placeholder}
         />
         {value.map((tag) => (

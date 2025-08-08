@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/infra/auth";
 import { db } from "@/lib/infra/db";
 import { coffees } from "@/lib/infra/schema";
 import { eq } from "drizzle-orm";
+import { getUserIdFromSession } from "@/lib/utils";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -21,7 +22,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  const userId = (session?.user as any)?.id as string | undefined;
+  const userId = getUserIdFromSession(session);
   if (!userId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
