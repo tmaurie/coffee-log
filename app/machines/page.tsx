@@ -2,6 +2,7 @@
 
 import { useCafeLog } from "@/context/CoffeeLogContext";
 import InfoCard from "@/components/info-card";
+import Link from "next/link";
 
 export default function MachinesPage() {
   const { machines } = useCafeLog();
@@ -10,14 +11,13 @@ export default function MachinesPage() {
     <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-8">Mes machines</h1>
 
-      {/* Bouton ajout futur (pour la V2, ici juste affiché) */}
       <div className="flex justify-end mb-4">
-        <button
-          className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg cursor-not-allowed"
-          disabled
+        <Link
+          href="/machines/new"
+          className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg"
         >
-          + Ajouter une machine (à venir)
-        </button>
+          + Ajouter une machine
+        </Link>
       </div>
 
       {(!machines || machines.length === 0) && (

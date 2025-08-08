@@ -1,5 +1,5 @@
 export type Coffee = {
-  id: string;
+  id: number;
   name: string;
   origin?: string;
   description?: string;
