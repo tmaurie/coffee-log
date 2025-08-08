@@ -1,14 +1,7 @@
-import {
-  pgTable,
-  serial,
-  varchar,
-  timestamp,
-  integer,
-  text,
-} from "drizzle-orm/pg-core";
+import {pgTable, text, timestamp, uuid, varchar,} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   username: varchar("username", { length: 255 }).notNull().unique(),
   passwordHash: varchar("password_hash", { length: 255 }).notNull(),
@@ -16,8 +9,8 @@ export const users = pgTable("users", {
 });
 
 export const coffees = pgTable("coffees", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id")
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
     .notNull()
     .references(() => users.id),
   name: varchar("name", { length: 255 }).notNull(),
@@ -27,8 +20,8 @@ export const coffees = pgTable("coffees", {
 });
 
 export const machines = pgTable("machines", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id")
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
     .notNull()
     .references(() => users.id),
   name: varchar("name", { length: 255 }).notNull(),

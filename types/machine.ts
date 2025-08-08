@@ -1,5 +1,5 @@
 export type Machine = {
-  id: number;
+  id: string;
   name: string;
   brand?: string;
   description?: string;

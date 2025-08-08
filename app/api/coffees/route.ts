@@ -15,7 +15,7 @@ export async function GET() {
   const data = await db
     .select()
     .from(coffees)
-    .where(eq(coffees.userId, Number(userId)));
+    .where(eq(coffees.userId, userId));
   return NextResponse.json(data);
 }
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       origin,
       description,
       tags,
-      userId: Number(userId),
+      userId,
     })
     .returning();
   return NextResponse.json(coffee, { status: 201 });
