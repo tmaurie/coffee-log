@@ -6,16 +6,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coffee, Star, TestTubeDiagonal, ToolCase } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { tests } = useCafeLog();
+  const { data: session } = useSession();
+  const displayName = session?.user?.name ?? session?.user?.email;
 
   const lastTest = tests.length ? tests[tests.length - 1] : null;
 
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-8">
       <h1 className="text-3xl font-bold">
-        Bienvenue sur <span className="text-amber-700">CaféLog</span> !
+        Bienvenue sur <span className="text-amber-700">CaféLog</span>
+        {displayName && <span>, {displayName}</span>} !
       </h1>
 
       {/* Dernier test */}

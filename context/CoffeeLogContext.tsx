@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Test } from "@/types/test";
 import { Coffee } from "@/types/coffee";
 import { Machine } from "@/types/machine";
+import { SessionProvider } from "next-auth/react";
 
 type CoffeeLogContext = {
   tests: Test[];
@@ -52,9 +53,11 @@ export const CafeLogProvider = ({ children }: { children: ReactNode }) => {
   const addTest = (test: Test) => setTests((tests) => [...tests, test]);
 
   return (
-    <CoffeeLogContext.Provider value={{ tests, coffees, machines, addTest }}>
-      {children}
-    </CoffeeLogContext.Provider>
+    <SessionProvider>
+      <CoffeeLogContext.Provider value={{ tests, coffees, machines, addTest }}>
+        {children}
+      </CoffeeLogContext.Provider>
+    </SessionProvider>
   );
 };
 
