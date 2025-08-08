@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { tests } = useCafeLog();
-  const { data: session} = useSession();
+  const { data: session } = useSession();
   const displayName = session?.user?.name ?? session?.user?.email;
 
   const lastTest = tests.length ? tests[tests.length - 1] : null;

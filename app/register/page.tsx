@@ -18,7 +18,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
-    if (!email || !password || !confirm) {
+    if (!email || !username || !password || !confirm) {
       return setError("Tous les champs sont obligatoires");
     }
     if (password !== confirm) {
@@ -37,12 +37,7 @@ export default function RegisterPage() {
     if (!res.ok) {
       if (res.status === 409) return setError("Cet email est déjà utilisé");
       return setError(
-        "Erreur lors de l'inscription" +
-          res.status +
-          " " +
-          res.statusText +
-          " " +
-          res,
+        "Une erreur est survenue lors de la création du compte. Veuillez réessayer",
       );
     }
 
