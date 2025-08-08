@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
@@ -28,14 +29,21 @@ export default function RegisterPage() {
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, username }),
     });
 
     setLoading(false);
 
     if (!res.ok) {
       if (res.status === 409) return setError("Cet email est déjà utilisé");
-      return setError("Erreur lors de l'inscription");
+      return setError(
+        "Erreur lors de l'inscription" +
+          res.status +
+          " " +
+          res.statusText +
+          " " +
+          res,
+      );
     }
 
     router.push("/"); // Redirige vers la home après inscription
@@ -50,6 +58,12 @@ export default function RegisterPage() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          placeholder="Nom d'utilisateur"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <Input

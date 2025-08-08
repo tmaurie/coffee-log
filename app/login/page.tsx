@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [err, setErr] = useState("");
   const router = useRouter();
 
@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setErr("");
     const res = await signIn("credentials", {
-      email,
+      identifier,
       password,
       redirect: false,
     });
@@ -23,8 +23,8 @@ export default function LoginPage() {
     router.push("/");
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handleIdentifierChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIdentifier(e.target.value);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,11 +36,11 @@ export default function LoginPage() {
       <h1 className="text-2xl font-bold">Connexion</h1>
       <form onSubmit={submit} className="space-y-3">
         <Input
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
+          placeholder="Email ou username"
+          value={identifier}
+          onChange={handleIdentifierChange}
         />
+
         <Input
           placeholder="Mot de passe"
           type="password"

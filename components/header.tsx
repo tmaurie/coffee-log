@@ -5,8 +5,28 @@ import Link from "next/link";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/hooks/useTheme";
 
+export const navlink = {
+  home: {
+    href: "/",
+    label: "Accueil",
+  },
+  tests: {
+    href: "/tests",
+    label: "Tests",
+  },
+  machines: {
+    href: "/machines",
+    label: "Machines",
+  },
+  beans: {
+    href: "/beans",
+    label: "Cafés",
+  },
+};
+
 export default function HeaderClient() {
-  const { data: session, status } = useSession(); // 👈 réactif
+  const { data: session, status } = useSession();
+  const displayName = session?.user?.name ?? session?.user?.email;
   const { theme, toggleTheme } = useTheme();
   const email = session?.user?.email;
 
@@ -16,12 +36,19 @@ export default function HeaderClient() {
         <Link href="/" className="font-extrabold text-2xl text-amber-700">
           CaféLog
         </Link>
+        <div className="hidden md:flex items-center gap-6">
+          {Object.entries(navlink).map(([key, { href, label }]) => (
+            <Link key={key} href={href}>
+              <Button variant="ghost">{label}</Button>
+            </Link>
+          ))}
+        </div>
 
         <div className="flex items-center gap-2 text-sm">
           {status === "loading" ? null : email ? (
             <>
               <span className="hidden sm:inline">
-                Bienvenue, <strong>{email}</strong>
+                Bienvenue, <strong>{displayName}</strong>
               </span>
               <Button
                 variant="ghost"
