@@ -156,7 +156,7 @@ export default function TestForm() {
               required
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Type de boisson" />
+                <SelectValue placeholder="Sélectionnez un type" />
               </SelectTrigger>
               <SelectContent>
                 {BEVERAGE_TYPES.map((type) => (
