@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import TagInput from "@/components/tag-input";
 
 export default function NewCoffeePage() {
   const { addCoffee } = useCafeLog();
@@ -12,7 +13,7 @@ export default function NewCoffeePage() {
   const [name, setName] = useState("");
   const [origin, setOrigin] = useState("");
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState<string[]>([]); // <-- tableau désormais
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +21,7 @@ export default function NewCoffeePage() {
       name,
       origin,
       description,
-      tags: tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter((t) => t.length > 0),
+      tags, // <-- déjà un string[]
     });
     router.push("/coffees");
   };
@@ -48,10 +46,10 @@ export default function NewCoffeePage() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
         />
-        <Input
+        <TagInput
           value={tags}
-          onChange={(e) => setTags(e.target.value)}
-          placeholder="Tags (séparés par des virgules)"
+          onChange={setTags}
+          placeholder="Ajoutez un tag (Entrée pour valider)"
         />
         <Button type="submit">Ajouter</Button>
       </form>

@@ -2,7 +2,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
+import { LogOut, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/hooks/useTheme";
 
 export const navlink = {
@@ -18,8 +18,8 @@ export const navlink = {
     href: "/machines",
     label: "Machines",
   },
-  beans: {
-    href: "/beans",
+  coffees: {
+    href: "/coffees",
     label: "Cafés",
   },
 };
@@ -54,7 +54,7 @@ export default function HeaderClient() {
                 variant="ghost"
                 onClick={() => signOut({ callbackUrl: "/" })}
               >
-                Se déconnecter
+                <LogOut />
               </Button>
             </>
           ) : (
