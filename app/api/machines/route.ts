@@ -8,7 +8,7 @@ import { getUserIdFromSession } from "@/lib/utils";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  const userId = (session?.user as any)?.id as string | undefined;
+  const userId = getUserIdFromSession(session);
   if (!userId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }

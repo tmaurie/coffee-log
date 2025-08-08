@@ -11,6 +11,7 @@ import { Test } from "@/types/test";
 import { Coffee } from "@/types/coffee";
 import { Machine } from "@/types/machine";
 import { SessionProvider, useSession } from "next-auth/react";
+import {getUserIdFromSession} from "@/lib/utils";
 
 type CoffeeLogContext = {
   tests: Test[];
@@ -28,7 +29,7 @@ const CafeLogProviderInner = ({ children }: { children: ReactNode }) => {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [machines, setMachines] = useState<Machine[]>([]);
   const { data: session } = useSession();
-  const userId = (session?.user as any)?.id as string | undefined;
+  const userId = getUserIdFromSession(session);
 
   useEffect(() => {
     const fetchData = async () => {
