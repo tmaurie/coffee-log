@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Star } from "lucide-react";
+import { BEVERAGE_TYPES } from "@/lib/consts/beverage-types";
 
 type TestFormFields = {
   date: string;
@@ -146,13 +147,25 @@ export default function TestForm() {
           </div>
           <div>
             <label className="block mb-1 font-semibold">Type de boisson</label>
-            <Input
+            <Select
               name="beverageType"
               value={form.beverageType}
-              onChange={handleChange}
+              onValueChange={(value) =>
+                setForm((f) => ({ ...f, beverageType: value }))
+              }
               required
-              placeholder="Expresso, Lungo, ..."
-            />
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Type de boisson" />
+              </SelectTrigger>
+              <SelectContent>
+                {BEVERAGE_TYPES.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </CardContent>
       </Card>
