@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -19,7 +18,6 @@ import {
 import { Star } from "lucide-react";
 
 type TestFormFields = {
-  id: string; // Optional for initial state, will be set on submit
   date: string;
   cafe: string;
   machine: string;
@@ -37,7 +35,6 @@ type TestFormFields = {
 };
 
 const defaultForm: TestFormFields = {
-  id: uuidv4(), // Generate a unique ID for the test
   date: new Date().toISOString().slice(0, 10),
   cafe: "",
   machine: "",

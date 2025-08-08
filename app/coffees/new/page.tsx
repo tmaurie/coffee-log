@@ -13,7 +13,7 @@ export default function NewCoffeePage() {
   const [name, setName] = useState("");
   const [origin, setOrigin] = useState("");
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState<string[]>([]); // <-- tableau désormais
+  const [tags, setTags] = useState<string[]>([]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function NewCoffeePage() {
       name,
       origin,
       description,
-      tags, // <-- déjà un string[]
+      tags,
     });
     router.push("/coffees");
   };

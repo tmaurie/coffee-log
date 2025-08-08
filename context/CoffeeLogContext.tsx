@@ -17,7 +17,7 @@ type CoffeeLogContext = {
   tests: Test[];
   coffees: Coffee[];
   machines: Machine[];
-  addTest: (test: Test) => void;
+  addTest: (test: Omit<Test, "id" | "userId">) => Promise<void>;
   addCoffee: (coffee: Omit<Coffee, "id">) => Promise<void>;
   addMachine: (machine: Omit<Machine, "id">) => Promise<void>;
 };
