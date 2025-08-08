@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -76,9 +75,9 @@ export default function TestForm() {
     setForm((prev) => ({ ...prev, favorite: checked }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addTest({ ...form, id: uuidv4() });
+    await addTest(form);
     setForm(defaultForm);
     router.push("/tests");
   };

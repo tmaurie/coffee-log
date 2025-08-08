@@ -41,7 +41,7 @@ export default function BottomNav() {
 
       {/* Bouton central “Ajouter” */}
       <Link
-        href="/new-test"
+        href="/tests/new"
         className="relative -top-6 bg-amber-600 hover:bg-amber-700 text-white rounded-full shadow-lg p-3 border-4 border-white dark:border-zinc-900 flex items-center justify-center transition"
         aria-label="Ajouter un test"
       >

@@ -11,13 +11,13 @@ import { Test } from "@/types/test";
 import { Coffee } from "@/types/coffee";
 import { Machine } from "@/types/machine";
 import { SessionProvider, useSession } from "next-auth/react";
-import {getUserIdFromSession} from "@/lib/utils";
+import { getUserIdFromSession } from "@/lib/utils";
 
 type CoffeeLogContext = {
   tests: Test[];
   coffees: Coffee[];
   machines: Machine[];
-  addTest: (test: Test) => void;
+  addTest: (test: Omit<Test, "id" | "userId">) => Promise<void>;
   addCoffee: (coffee: Omit<Coffee, "id">) => Promise<void>;
   addMachine: (machine: Omit<Machine, "id">) => Promise<void>;
 };
@@ -54,6 +54,14 @@ const CafeLogProviderInner = ({ children }: { children: ReactNode }) => {
     fetchData();
   }, [userId]);
 
+  useEffect(() => {
+    const fetchTests = async () => {
+      const res = await fetch("/api/tests");
+      if (res.ok) setTests(await res.json());
+    };
+    fetchTests();
+  }, [userId]);
+
   const addCoffee = async (coffee: Omit<Coffee, "id">) => {
     const res = await fetch("/api/coffees", {
       method: "POST",
@@ -78,7 +86,17 @@ const CafeLogProviderInner = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const addTest = (test: Test) => setTests((tests) => [...tests, test]);
+  const addTest = async (test: Omit<Test, "id" | "userId">) => {
+    const res = await fetch("/api/tests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(test),
+    });
+    if (res.ok) {
+      const newTest = await res.json();
+      setTests((prev) => [...prev, newTest]);
+    }
+  };
 
   return (
     <CoffeeLogContext.Provider
