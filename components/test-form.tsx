@@ -77,7 +77,7 @@ export default function TestForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addTest(form);
+    await addTest(form);
     setForm(defaultForm);
     router.push("/tests");
   };
