@@ -71,7 +71,7 @@ export default function Home() {
       {/* Bouton ajouter un test */}
       <div className="flex justify-center">
         <Link href="/tests/new">
-          <Button variant="primary" size="lg" className="flex items-center gap-2">
+          <Button size="lg" className="flex items-center gap-2">
               <PlusCircle /> Ajouter un test
           </Button>
         </Link>
