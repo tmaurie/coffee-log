@@ -26,7 +26,8 @@ export async function POST(req: Request) {
   if (!userId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
-  const { name, origin, description, tags } = await req.json();
+  const { name, origin, description, tags, roastLevel, rating } =
+    await req.json();
   if (!name) {
     return new NextResponse("Name is required", { status: 400 });
   }
@@ -38,6 +39,8 @@ export async function POST(req: Request) {
       description,
       tags,
       userId,
+      roastLevel,
+      rating,
     })
     .returning();
   return NextResponse.json(coffee, { status: 201 });

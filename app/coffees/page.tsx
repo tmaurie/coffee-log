@@ -34,6 +34,11 @@ export default function CafesPage() {
             subtitle={cafe.origin}
             description={cafe.description}
             tags={cafe.tags}
+            right={
+              <span className="text-sm text-gray-500">
+                {cafe.roastLevel} &bull; {cafe.rating}/5
+              </span>
+            }
           />
         ))}
       </div>
