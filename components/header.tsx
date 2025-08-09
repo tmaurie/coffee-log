@@ -2,7 +2,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LogOut, Moon, Sun } from "lucide-react";
+import { HomeIcon, LogOut, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/hooks/useTheme";
 
 export const navlink = {
@@ -33,17 +33,23 @@ export default function HeaderClient() {
   return (
     <header className="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 shadow-sm backdrop-blur">
       <nav className="max-w-4xl mx-auto flex items-center justify-between p-4">
-        <Link href="/" className="font-extrabold text-2xl text-amber-700">
-          CaféLog
-        </Link>
-        <div className="hidden md:flex items-center gap-6">
-          {Object.entries(navlink).map(([key, { href, label }]) => (
-            <Link key={key} href={href}>
-              <Button variant="ghost">{label}</Button>
+        <div className="flex items-center gap-4">
+          <Link href="/" className="font-extrabold text-2xl text-amber-700">
+            CaféLog
+          </Link>
+          <div className="hidden md:flex items-center gap-2">
+            <Link href="/">
+              <Button variant="outline" size="icon" className="rounded-full">
+                <HomeIcon className="h-5 w-5" />
+              </Button>
             </Link>
-          ))}
+            {Object.entries(navlink).map(([key, { href, label }]) => (
+              <Link key={key} href={href}>
+                <Button variant="ghost">{label}</Button>
+              </Link>
+            ))}
+          </div>
         </div>
-
         <div className="flex items-center gap-2 text-sm">
           {status === "loading" ? null : email ? (
             <>
@@ -63,7 +69,9 @@ export default function HeaderClient() {
                 <Button variant="ghost">Se connecter</Button>
               </Link>
               <Link href="/register">
-                <Button variant="ghost">Créer un compte</Button>
+                <Button variant="outline" className="rounded-full">
+                  Créer un compte
+                </Button>
               </Link>
             </>
           )}
@@ -73,6 +81,7 @@ export default function HeaderClient() {
             size="icon"
             onClick={toggleTheme}
             aria-label="Toggle theme"
+            className="rounded-full"
           >
             {theme === "dark" ? (
               <Sun className="h-5 w-5" />

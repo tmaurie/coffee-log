@@ -5,7 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Coffee, PlusCircle, Star, TestTubeDiagonal, ToolCase } from "lucide-react";
+import {
+  Coffee,
+  PlusCircle,
+  Star,
+  TestTubeDiagonal,
+  ToolCase,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
@@ -17,7 +23,7 @@ export default function Home() {
 
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold font-serif">
         Bienvenue sur <span className="text-amber-700">CaféLog</span>
         {displayName && <span>, {displayName}</span>} !
       </h1>
@@ -72,7 +78,7 @@ export default function Home() {
       <div className="flex justify-center">
         <Link href="/tests/new">
           <Button size="lg" className="flex items-center gap-2">
-              <PlusCircle /> Ajouter un test
+            <PlusCircle /> Ajouter un test
           </Button>
         </Link>
       </div>
