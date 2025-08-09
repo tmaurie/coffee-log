@@ -5,7 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Coffee, Star, TestTubeDiagonal, ToolCase } from "lucide-react";
+import {
+  Coffee,
+  PlusCircle,
+  Star,
+  TestTubeDiagonal,
+  ToolCase,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
@@ -17,7 +23,7 @@ export default function Home() {
 
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold font-serif">
         Bienvenue sur <span className="text-amber-700">CaféLog</span>
         {displayName && <span>, {displayName}</span>} !
       </h1>
@@ -25,7 +31,7 @@ export default function Home() {
       {/* Dernier test */}
       <section>
         <Card>
-          <CardHeader>
+          <CardHeader className="flex flex-col md:flex-row items-start md:items-center justify-between">
             <CardTitle className="flex items-center gap-2">
               Dernier test
               {lastTest && lastTest.favorite && (
@@ -34,6 +40,13 @@ export default function Home() {
                 </Badge>
               )}
             </CardTitle>
+            {lastTest && (
+              <Link href={`/tests/${lastTest.id}`} passHref>
+                <Button className="mt-2 w-fit" variant="secondary" size="sm">
+                  Voir le détail
+                </Button>
+              </Link>
+            )}
           </CardHeader>
           <CardContent>
             {lastTest ? (
@@ -51,11 +64,6 @@ export default function Home() {
                     “{lastTest.comment}”
                   </div>
                 )}
-                <Link href={`/tests/${lastTest.id}`} passHref>
-                  <Button className="mt-2 w-fit" variant="secondary" size="sm">
-                    Voir le détail
-                  </Button>
-                </Link>
               </div>
             ) : (
               <div className="text-gray-400">
@@ -69,7 +77,9 @@ export default function Home() {
       {/* Bouton ajouter un test */}
       <div className="flex justify-center">
         <Link href="/tests/new">
-          <Button>+ Ajouter un test</Button>
+          <Button size="lg" className="flex items-center gap-2">
+            <PlusCircle /> Ajouter un test
+          </Button>
         </Link>
       </div>
 
