@@ -35,7 +35,7 @@ export default function StarRating({
           </button>
         );
       })}
-      <span className="ml-2 text-sm">{value}/5</span>
+      <span className="ml-2 text-sm">{value}/{max}</span>
     </div>
   );
 }

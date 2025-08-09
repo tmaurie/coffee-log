@@ -36,7 +36,7 @@ export default function CafesPage() {
             tags={cafe.tags}
             right={
               <span className="text-sm text-gray-500">
-                {cafe.roastLevel} &bull; {cafe.rating}/5
+                {(cafe.roastLevel ?? "N/A")} &bull; {(cafe.rating ?? "-")}/5
               </span>
             }
           />
