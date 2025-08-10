@@ -65,21 +65,17 @@ export default function NewCoffeePage() {
           onChange={setTags}
           placeholder="Ajoutez un tag (Entrée pour valider)"
         />
-        <p className="text-xs text-gray-500">
-          Séparer les tags par virgule ou utiliser le bouton +
-        </p>
 
         {/* Roast level */}
         <div className="space-y-1">
-          <label className="text-sm font-medium">Niveau de torréfaction</label>
           <Select
             value={roastLevel}
             onValueChange={(value) =>
               setRoastLevel(value as (typeof ROAST_LEVELS)[number])
             }
           >
-            <SelectTrigger>
-              <SelectValue placeholder="Sélectionner…" />
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Niveau de torréfaction…" />
             </SelectTrigger>
             <SelectContent>
               {ROAST_LEVELS.map((l) => (
