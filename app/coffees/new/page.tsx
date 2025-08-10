@@ -58,7 +58,7 @@ export default function NewCoffeePage() {
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
+          placeholder="Torréfaction / mélange / avis…"
         />
         <TagInput
           value={tags}
@@ -68,15 +68,14 @@ export default function NewCoffeePage() {
 
         {/* Roast level */}
         <div className="space-y-1">
-          <label className="text-sm font-medium">Niveau de torréfaction</label>
           <Select
             value={roastLevel}
             onValueChange={(value) =>
               setRoastLevel(value as (typeof ROAST_LEVELS)[number])
             }
           >
-            <SelectTrigger>
-              <SelectValue placeholder="Sélectionner…" />
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Niveau de torréfaction…" />
             </SelectTrigger>
             <SelectContent>
               {ROAST_LEVELS.map((l) => (
