@@ -26,6 +26,9 @@ export const coffees = pgTable("coffees", {
   origin: varchar("origin", { length: 255 }),
   description: text("description"),
   tags: text("tags").array(),
+  roastLevel: varchar("roast_level", { length: 20 }),
+  rating: integer("rating"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 
 export const machines = pgTable("machines", {
@@ -42,8 +45,8 @@ export const tests = pgTable("tests", {
   id: uuid("id").primaryKey().defaultRandom(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   date: date("date").notNull(),
-  cafe: varchar("cafe", { length: 100 }).notNull(), // id ou nom
-  machine: varchar("machine", { length: 100 }).notNull(), // id ou nom
+  cafe: varchar("cafe", { length: 100 }).notNull(),
+  machine: varchar("machine", { length: 100 }).notNull(),
   beverageType: varchar("beverage_type", { length: 50 }).notNull(),
   quantity: integer("quantity").notNull(),
   temperature: integer("temperature").notNull(),

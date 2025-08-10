@@ -4,4 +4,6 @@ export type Coffee = {
   origin?: string;
   description?: string;
   tags?: string[];
+  roastLevel?: "Clair" | "Moyen" | "Foncé" | "Très foncé";
+  rating?: number;
 };
