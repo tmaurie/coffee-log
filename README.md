@@ -33,7 +33,7 @@ Polisher l'expérience utilisateur (UX/UI), enrichir les données persistées et
 
 ### 2) **Cafés**
 - [ ] **Nouvelles colonnes** :
-    - Niveau de torréfaction (`roastLevel`) — select (Clair / Moyen / Foncé / Très foncé)
+    - Niveau de torréfaction (`roastLevel`) — select (Verte, Moyenne, Foncée, Très Foncée)
     - Note du café (`rating`) — étoiles (1–5)
 - [ ] Tag input amélioré :
     - Dé-duplication

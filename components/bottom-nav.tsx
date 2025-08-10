@@ -32,7 +32,7 @@ export default function BottomNav() {
         <Link
           key={item.href}
           href={item.href}
-          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition"
+          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition w-10"
         >
           {item.icon}
           <span className="text-[11px]">{item.label}</span>
@@ -53,7 +53,7 @@ export default function BottomNav() {
         <Link
           key={item.href}
           href={item.href}
-          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition"
+          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 w-10"
         >
           {item.icon}
           <span className="text-[11px]">{item.label}</span>
