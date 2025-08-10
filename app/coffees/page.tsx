@@ -26,7 +26,7 @@ export default function CafesPage() {
         </div>
       )}
 
-      <div className="grid gap-4">
+      <div className="grid gap-6">
         {coffees?.map((cafe) => (
           <InfoCard
             key={cafe.id}
@@ -36,7 +36,7 @@ export default function CafesPage() {
             tags={cafe.tags}
             right={
               <span className="text-sm text-gray-500">
-                {(cafe.roastLevel ?? "N/A")} &bull; {(cafe.rating ?? "-")}/5
+                {cafe.roastLevel ?? "N/A"} &bull; {cafe.rating ?? "-"}/5
               </span>
             }
           />

@@ -58,13 +58,16 @@ export default function NewCoffeePage() {
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
+          placeholder="Torréfaction / mélange / avis…"
         />
         <TagInput
           value={tags}
           onChange={setTags}
           placeholder="Ajoutez un tag (Entrée pour valider)"
         />
+        <p className="text-xs text-gray-500">
+          Séparer les tags par virgule ou utiliser le bouton +
+        </p>
 
         {/* Roast level */}
         <div className="space-y-1">
