@@ -14,8 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {Card} from "@/components/ui/card";
-import {Coffee} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Coffee } from "lucide-react";
 
 const ROAST_LEVELS = ["Verte", "Moyenne", "Foncée", "Très foncée"] as const;
 
@@ -44,7 +44,10 @@ export default function NewCoffeePage() {
 
   return (
     <Card className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-8 flex items-center"><Coffee className="h-6 w-6 mr-2" />Ajouter un café</h1>
+      <h1 className="text-2xl font-bold mb-8 flex items-center">
+        <Coffee className="h-6 w-6 mr-2" />
+        Ajouter un café
+      </h1>
       <form onSubmit={submit} className="space-y-4">
         <Input
           value={name}

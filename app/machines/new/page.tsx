@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {Card} from "@/components/ui/card";
-import {ToolCase} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { ToolCase } from "lucide-react";
 
 export default function NewMachinePage() {
   const { addMachine } = useCafeLog();
@@ -23,7 +23,10 @@ export default function NewMachinePage() {
 
   return (
     <Card className="max-w-md mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-2 flex items-center"><ToolCase className="h-6 w-6 mr-2" />Ajouter une machine</h1>
+      <h1 className="text-2xl font-bold mb-2 flex items-center">
+        <ToolCase className="h-6 w-6 mr-2" />
+        Ajouter une machine
+      </h1>
       <form onSubmit={submit} className="space-y-4">
         <Input
           value={name}
