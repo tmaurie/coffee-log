@@ -51,7 +51,7 @@ const defaultForm: TestFormFields = {
   cafe: "",
   machine: "",
   beverageType: "",
-  waterQuantity: 0,
+  waterQuantity: undefined,
   temperature: 92,
   pressure: 9,
   grindFineness: "",
@@ -222,10 +222,10 @@ export default function TestForm() {
               Finesse de la mouture
             </label>
             <Select
-              name="grindSize"
+              name="grindFineness"
               value={form.grindFineness}
               onValueChange={(value) =>
-                setForm((f) => ({ ...f, grindSize: value }))
+                setForm((f) => ({ ...f, grindFineness: value }))
               }
               required
             >
@@ -257,7 +257,7 @@ export default function TestForm() {
                 }))
               }
               min={0}
-              step={0.1}
+              step={1}
               placeholder="Ex: 18"
             />
           </div>
@@ -281,11 +281,12 @@ export default function TestForm() {
             </label>
             <Input
               type="number"
-              name="quantity"
+              name="waterQuantity"
               value={form.waterQuantity}
               min={10}
               max={500}
               onChange={handleChange}
+              placeholder="Ex: 30"
             />
           </div>
           {/* 5. Pré-infusion (sec) */}
