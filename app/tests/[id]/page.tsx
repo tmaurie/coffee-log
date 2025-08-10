@@ -80,7 +80,7 @@ export default function TestDetailPage() {
                 </li>
                 {test.grindSize && (
                   <li>
-                    Mouture : <b>{test.grindSize}</b>
+                    Finesse de la mouture : <b>{test.grindSize}</b>
                   </li>
                 )}
               </ul>

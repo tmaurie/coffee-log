@@ -6,10 +6,6 @@ import { HomeIcon, LogOut, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/hooks/useTheme";
 
 export const navlink = {
-  home: {
-    href: "/",
-    label: "Accueil",
-  },
   tests: {
     href: "/tests",
     label: "Tests",
