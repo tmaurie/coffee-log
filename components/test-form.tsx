@@ -1,17 +1,29 @@
 "use client";
-import {useState} from "react";
-import {useCafeLog} from "@/context/CoffeeLogContext";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {Slider} from "@/components/ui/slider";
-import {Switch} from "@/components/ui/switch";
-import {Textarea} from "@/components/ui/textarea";
-import {useRouter} from "next/navigation";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import {BEVERAGE_TYPES} from "@/lib/consts/beverage-types";
+import { useState } from "react";
+import { useCafeLog } from "@/context/CoffeeLogContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { BEVERAGE_TYPES } from "@/lib/consts/beverage-types";
 import StarRating from "@/components/star-rating";
-import {Separator} from "@radix-ui/react-select";
+import { Separator } from "@radix-ui/react-select";
 
 type TestFormFields = {
   date: string;
@@ -173,7 +185,30 @@ export default function TestForm() {
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="block mb-1 font-semibold">
-              Quantité d’eau (ml)
+              Finesse de la mouture
+            </label>
+            <Select
+              name="grindSize"
+              value={form.grindSize}
+              onValueChange={(value) =>
+                setForm((f) => ({ ...f, grindSize: value }))
+              }
+              required
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionnez une finesse" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Très fine">Très fine</SelectItem>
+                <SelectItem value="Fine">Fine</SelectItem>
+                <SelectItem value="Moyenne">Moyenne</SelectItem>
+                <SelectItem value="Grossière">Grossière</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold">
+              Quantité d’eau (ml) (optionnel)
             </label>
             <Input
               type="number"
@@ -182,7 +217,6 @@ export default function TestForm() {
               min={10}
               max={500}
               onChange={handleChange}
-              required
             />
           </div>
           <div>
@@ -209,15 +243,6 @@ export default function TestForm() {
               required
             />
           </div>
-          <div>
-            <label className="block mb-1 font-semibold">Finesse de la mouture</label>
-            <Input
-              name="grindSize"
-              value={form.grindSize}
-              onChange={handleChange}
-              placeholder="Fine, moyenne, grosse..."
-            />
-          </div>
         </CardContent>
       </Card>
 
@@ -236,7 +261,7 @@ export default function TestForm() {
               value={[form.intensity]}
               onValueChange={(v) => handleSlider("intensity", v)}
             />
-            <span className="text-sm">Niveau : {form.intensity}</span>
+            <span className="text-sm">Niveau : {form.intensity}</span>
           </div>
           <div>
             <label className="block mb-1 font-semibold">Amertume</label>
@@ -247,7 +272,7 @@ export default function TestForm() {
               value={[form.bitterness]}
               onValueChange={(v) => handleSlider("bitterness", v)}
             />
-            <span className="text-sm">Niveau : {form.bitterness}</span>
+            <span className="text-sm">Niveau : {form.bitterness}</span>
           </div>
           <div>
             <label className="block mb-1 font-semibold">Acidité</label>
@@ -258,16 +283,19 @@ export default function TestForm() {
               value={[form.acidity]}
               onValueChange={(v) => handleSlider("acidity", v)}
             />
-            <span className="text-sm">Niveau : {form.acidity}</span>
+            <span className="text-sm">Niveau : {form.acidity}</span>
           </div>
         </CardContent>
-          <Separator className="border-t " />
-          <CardFooter>
-              <div>
-                  <label className="block mb-1 font-semibold">Note globale</label>
-                  <StarRating value={form.rating} onChange={(v) => setForm((f) => ({ ...f, rating: v }))} />
-              </div>
-          </CardFooter>
+        <Separator className="border-t" />
+        <CardFooter>
+          <div>
+            <label className="block mb-1 font-semibold">Note globale</label>
+            <StarRating
+              value={form.rating}
+              onChange={(v) => setForm((f) => ({ ...f, rating: v }))}
+            />
+          </div>
+        </CardFooter>
       </Card>
 
       {/* 4. Avis & favori */}
