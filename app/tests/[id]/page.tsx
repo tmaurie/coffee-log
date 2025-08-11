@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useCafeLog } from "@/context/CoffeeLogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { Coffee, Filter, Star, ToolCase } from "lucide-react";
 
 export default function TestDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -53,8 +53,19 @@ export default function TestDetailPage() {
               })}
             </Badge>
           </CardTitle>
-          <div className="text-sm text-gray-500 mt-2">
-            {test.machine} — {test.beverageType}
+          <div className="text-sm text-gray-500 flex items-center gap-2 mt-2">
+            <Badge variant="secondary">
+              <ToolCase /> {test.machine}
+            </Badge>
+            <Badge variant="secondary">
+              {" "}
+              <Coffee />
+              {test.beverageType}{" "}
+            </Badge>
+            <Badge variant="secondary">
+              <Filter />
+              {test.filterType}
+            </Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -81,6 +92,21 @@ export default function TestDetailPage() {
                 {test.grindFineness && (
                   <li>
                     Finesse de la mouture : <b>{test.grindFineness}</b>
+                  </li>
+                )}
+                {test.doseGrams && (
+                  <li>
+                    Quantité de mouture <b>{test.doseGrams} g</b>
+                  </li>
+                )}
+                {test.preinfusionSec && (
+                  <li>
+                    Temps d’infusion : <b>{test.preinfusionSec} s</b>
+                  </li>
+                )}
+                {test.extractionSec && (
+                  <li>
+                    Temps d’extraction : <b>{test.extractionSec} s</b>
                   </li>
                 )}
               </ul>
