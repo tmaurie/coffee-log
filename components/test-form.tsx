@@ -30,10 +30,14 @@ type TestFormFields = {
   cafe: string;
   machine: string;
   beverageType: string;
-  quantity: number;
+  doseGrams?: number;
+  filterType?: string;
+  waterQuantity?: number;
+  preinfusionSec?: number;
+  extractionSec?: number;
   temperature: number;
   pressure: number;
-  grindSize: string;
+  grindFineness?: string;
   intensity: number;
   bitterness: number;
   acidity: number;
@@ -47,10 +51,14 @@ const defaultForm: TestFormFields = {
   cafe: "",
   machine: "",
   beverageType: "",
-  quantity: 30,
+  waterQuantity: undefined,
   temperature: 92,
   pressure: 9,
-  grindSize: "",
+  grindFineness: "",
+  filterType: undefined,
+  doseGrams: undefined,
+  preinfusionSec: undefined,
+  extractionSec: undefined,
   intensity: 3,
   bitterness: 3,
   acidity: 3,
@@ -63,6 +71,12 @@ export default function TestForm() {
   const [form, setForm] = useState<TestFormFields>(defaultForm);
   const { addTest } = useCafeLog();
   const router = useRouter();
+  const FILTER_TYPES = [
+    "Simple 1 tasse",
+    "Simple 2 tasses",
+    "Pressurisé 1 tasse",
+    "Pressurisé 2 tasses",
+  ] as const;
 
   // Helpers
   const handleChange = (
@@ -163,12 +177,31 @@ export default function TestForm() {
               required
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Sélectionnez un type" />
+                <SelectValue placeholder="Sélectionnez un type de boisson" />
               </SelectTrigger>
               <SelectContent>
                 {BEVERAGE_TYPES.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          {/* Type de filtre */}
+          <div className="space-y-1">
+            <label className="block mb-1 font-semibold">Type de filtre</label>
+            <Select
+              value={form.filterType ?? ""}
+              onValueChange={(v) => setForm((f) => ({ ...f, filterType: v }))}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionner un type de filtre" />
+              </SelectTrigger>
+              <SelectContent>
+                {FILTER_TYPES.map((ft) => (
+                  <SelectItem key={ft} value={ft}>
+                    {ft}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -183,15 +216,16 @@ export default function TestForm() {
           <CardTitle>Caractéristiques de l’infusion</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">
+          {/* Finesse de la mouture */}
           <div>
             <label className="block mb-1 font-semibold">
               Finesse de la mouture
             </label>
             <Select
-              name="grindSize"
-              value={form.grindSize}
+              name="grindFineness"
+              value={form.grindFineness ?? ""}
               onValueChange={(value) =>
-                setForm((f) => ({ ...f, grindSize: value }))
+                setForm((f) => ({ ...f, grindFineness: value }))
               }
               required
             >
@@ -206,19 +240,28 @@ export default function TestForm() {
               </SelectContent>
             </Select>
           </div>
+          {/* 2. Quantité de mouture (g) */}
           <div>
             <label className="block mb-1 font-semibold">
-              Quantité d’eau (ml) (optionnel)
+              Quantité de mouture (g)
             </label>
             <Input
               type="number"
-              name="quantity"
-              value={form.quantity}
-              min={10}
-              max={500}
-              onChange={handleChange}
+              value={form.doseGrams ?? ""}
+              onChange={(e) =>
+                setForm((f) => ({
+                  ...f,
+                  doseGrams: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                }))
+              }
+              min={0}
+              step={1}
+              placeholder="Ex: 18"
             />
           </div>
+          {/* 3. Température (°C) */}
           <div>
             <label className="block mb-1 font-semibold">Température (°C)</label>
             <Input
@@ -231,6 +274,63 @@ export default function TestForm() {
               required
             />
           </div>
+          {/* 4. Quantité d’eau (ml) */}
+          <div>
+            <label className="block mb-1 font-semibold">
+              Quantité d’eau (ml){" "}
+              <span className="text-xs text-gray-500">(10-500 ml)</span>
+            </label>
+            <Input
+              type="number"
+              name="waterQuantity"
+              value={form.waterQuantity ?? ""}
+              min={10}
+              max={500}
+              onChange={handleChange}
+              placeholder="Ex: 30"
+            />
+          </div>
+          {/* 5. Pré-infusion (sec) */}
+          <div>
+            <label className="block mb-1 font-semibold">Pré-infusion (s)</label>
+            <Input
+              type="number"
+              value={form.preinfusionSec ?? ""}
+              onChange={(e) =>
+                setForm((f) => ({
+                  ...f,
+                  preinfusionSec: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                }))
+              }
+              min={0}
+              step={1}
+              placeholder="Ex: 5"
+            />
+          </div>
+          {/* 6. Temps d’infusion (s) */}
+          <div>
+            <label className="block mb-1 font-semibold">
+              Temps d’infusion (s)
+            </label>
+            <Input
+              type="number"
+              value={form.extractionSec ?? ""}
+              onChange={(e) =>
+                setForm((f) => ({
+                  ...f,
+                  extractionSec: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                }))
+              }
+              min={0}
+              step={1}
+              placeholder="Ex: 25"
+            />
+          </div>
+
           <div>
             <label className="block mb-1 font-semibold">Pression (bar)</label>
             <Input
@@ -306,7 +406,8 @@ export default function TestForm() {
         <CardContent className="grid gap-4">
           <div>
             <label className="block mb-1 font-semibold">
-              Commentaire (optionnel)
+              Commentaire{" "}
+              <span className="text-xs text-gray-500">(optionnel)</span>
             </label>
             <Textarea
               name="comment"

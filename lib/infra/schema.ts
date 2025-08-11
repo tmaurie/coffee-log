@@ -46,12 +46,16 @@ export const tests = pgTable("tests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   date: date("date").notNull(),
   cafe: varchar("cafe", { length: 100 }).notNull(),
+  filterType: varchar("filter_type", { length: 40 }), // ex: Bottomless, Simple, Double...
+  grindFineness: varchar("grind_fineness", { length: 50 }),
+  doseGrams: integer("dose_grams"),
+  waterQuantity: integer("water_quantity"), // rendu optionnel côté form
+  preinfusionSec: integer("preinfusion_sec"),
+  extractionSec: integer("extraction_sec"),
   machine: varchar("machine", { length: 100 }).notNull(),
   beverageType: varchar("beverage_type", { length: 50 }).notNull(),
-  quantity: integer("quantity").notNull(),
   temperature: integer("temperature").notNull(),
   pressure: integer("pressure").notNull(),
-  grindSize: varchar("grind_size", { length: 50 }),
   intensity: integer("intensity").notNull(),
   bitterness: integer("bitterness").notNull(),
   acidity: integer("acidity").notNull(),

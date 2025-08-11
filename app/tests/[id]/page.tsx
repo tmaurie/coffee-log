@@ -70,7 +70,7 @@ export default function TestDetailPage() {
               <span className="block font-semibold mb-1">Conditions</span>
               <ul className="text-sm text-gray-600 dark:text-gray-300 list-disc ml-4 space-y-1">
                 <li>
-                  Quantité d’eau : <b>{test.quantity} ml</b>
+                  Quantité d’eau : <b>{test.waterQuantity} ml</b>
                 </li>
                 <li>
                   Température : <b>{test.temperature}°C</b>
@@ -78,9 +78,9 @@ export default function TestDetailPage() {
                 <li>
                   Pression : <b>{test.pressure} bar</b>
                 </li>
-                {test.grindSize && (
+                {test.grindFineness && (
                   <li>
-                    Finesse de la mouture : <b>{test.grindSize}</b>
+                    Finesse de la mouture : <b>{test.grindFineness}</b>
                   </li>
                 )}
               </ul>
