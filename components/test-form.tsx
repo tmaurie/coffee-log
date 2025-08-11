@@ -192,7 +192,7 @@ export default function TestForm() {
           <div className="space-y-1">
             <label className="block mb-1 font-semibold">Type de filtre</label>
             <Select
-              value={form.filterType}
+              value={form.filterType ?? ""}
               onValueChange={(v) => setForm((f) => ({ ...f, filterType: v }))}
             >
               <SelectTrigger className="w-full">
@@ -223,7 +223,7 @@ export default function TestForm() {
             </label>
             <Select
               name="grindFineness"
-              value={form.grindFineness}
+              value={form.grindFineness ?? ""}
               onValueChange={(value) =>
                 setForm((f) => ({ ...f, grindFineness: value }))
               }
@@ -277,12 +277,13 @@ export default function TestForm() {
           {/* 4. Quantité d’eau (ml) */}
           <div>
             <label className="block mb-1 font-semibold">
-              Quantité d’eau (ml) (optionnel)
+              Quantité d’eau (ml){" "}
+              <span className="text-xs text-gray-500">(10-500 ml)</span>
             </label>
             <Input
               type="number"
               name="waterQuantity"
-              value={form.waterQuantity}
+              value={form.waterQuantity ?? ""}
               min={10}
               max={500}
               onChange={handleChange}
@@ -405,7 +406,8 @@ export default function TestForm() {
         <CardContent className="grid gap-4">
           <div>
             <label className="block mb-1 font-semibold">
-              Commentaire (optionnel)
+              Commentaire{" "}
+              <span className="text-xs text-gray-500">(optionnel)</span>
             </label>
             <Textarea
               name="comment"
