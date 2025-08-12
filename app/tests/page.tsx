@@ -1,22 +1,22 @@
 "use client";
 
 import { useCafeLog } from "@/context/CoffeeLogContext";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function TestsPage() {
   const { tests } = useCafeLog();
 
   return (
-    <main className="max-w-3xl mx-auto p-6">
+    <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-8">Mes tests café</h1>
 
       <div className="flex justify-end mb-4">
         <Link href="/tests/new">
-          <Button className="bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-lg font-semibold">
+          <Button className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg">
             + Ajouter un test
           </Button>
         </Link>
@@ -32,27 +32,42 @@ export default function TestsPage() {
         {tests.map((test) => (
           <Link key={test.id} href={`/tests/${test.id}`} className="block">
             <Card className="hover:shadow-md transition border cursor-pointer">
-              <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2 p-4">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline" className="text-xs">
+                    {new Date(test.date).toLocaleDateString("fr-FR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Heart
+                      className={`${test.favorite ? "text-red-500" : "text-gray-400 opacity-20"}`}
+                      size={16}
+                      fill={test.favorite ? "currentColor" : "none"}
+                    />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
                 <div className="flex-1">
                   <div className="font-semibold text-lg flex items-center gap-2">
                     {test.cafe}
-                    {test.favorite && (
-                      <Star
-                        className="inline h-5 w-5 text-yellow-500"
-                        fill="#facc15"
-                      />
-                    )}
                   </div>
                   <div className="text-xs text-gray-500">
                     {test.machine} &bull; {test.beverageType} &bull; {test.date}
                   </div>
                 </div>
                 <div className="flex gap-3 items-center">
-                  <Badge variant="secondary" className="text-sm">
-                    Note : {test.rating}/5
-                  </Badge>
                   <Badge variant="outline" className="text-xs">
                     {test.beverageType}
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className={`text-xs ${test.rating >= 4 ? "bg-green-100 text-green-800" : test.rating >= 3 ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800"}`}
+                  >
+                    Note : {test.rating}/5
                   </Badge>
                 </div>
               </CardContent>

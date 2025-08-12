@@ -3,6 +3,7 @@
 import { useCafeLog } from "@/context/CoffeeLogContext";
 import InfoCard from "@/components/info-card";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function CafesPage() {
   const { coffees } = useCafeLog();
@@ -12,11 +13,10 @@ export default function CafesPage() {
       <h1 className="text-2xl font-bold mb-8">Mes cafés</h1>
 
       <div className="flex justify-end mb-4">
-        <Link
-          href="/coffees/new"
-          className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg"
-        >
-          + Ajouter un café
+        <Link href="/coffees/new">
+          <Button className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg">
+            + Ajouter un café
+          </Button>
         </Link>
       </div>
 
