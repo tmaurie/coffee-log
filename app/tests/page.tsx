@@ -50,7 +50,7 @@ export default function TestsPage() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2 ">
+              <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
                 <div className="flex-1">
                   <div className="font-semibold text-lg flex items-center gap-2">
                     {test.cafe}
