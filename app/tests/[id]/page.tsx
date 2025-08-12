@@ -58,9 +58,8 @@ export default function TestDetailPage() {
               <ToolCase /> {test.machine}
             </Badge>
             <Badge variant="secondary">
-              {" "}
               <Coffee />
-              {test.beverageType}{" "}
+              {test.beverageType}
             </Badge>
             <Badge variant="secondary">
               <Filter />
