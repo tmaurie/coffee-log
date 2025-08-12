@@ -101,7 +101,7 @@ export default function Home() {
           <Link href="/coffees">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <Coffee className="text-2xl mb-2 text-amber-300 " />
+                <Coffee className="text-2xl mb-2 text-amber-300" />
                 <div>Mes cafés</div>
                 <div className="text-xs text-gray-500 mt-1 relative z-10">
                   {coffees.length} café{coffees.length > 1 ? "s" : ""}
