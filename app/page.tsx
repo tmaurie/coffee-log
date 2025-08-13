@@ -35,8 +35,8 @@ export default function Home() {
             <CardTitle className="flex items-center gap-2">
               Dernier test
               {lastTest && lastTest.favorite && (
-                <Badge className="ml-2 bg-amber-200 text-yellow-900">
-                  Favori
+                <Badge variant="secondary">
+                  Favori <Heart className="inline-block ml-1 text-red-500" fill="currentColor" />
                 </Badge>
               )}
             </CardTitle>
