@@ -95,7 +95,7 @@ export default function NewCoffeePage() {
         {/* Note du café */}
         <div className="space-y-1">
           <label className="text-sm font-medium">Note du café</label>
-          <StarRating value={rating} onChange={setRating} />
+          <StarRating value={rating} onChangeAction={setRating} />
         </div>
         <Button type="submit">Ajouter</Button>
       </form>

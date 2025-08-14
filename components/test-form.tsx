@@ -1,38 +1,22 @@
 "use client";
-import React, { useState } from "react";
-import { useCafeLog } from "@/context/CoffeeLogContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { BEVERAGE_TYPES } from "@/lib/consts/beverage-types";
+import React, {useState} from "react";
+import {useCafeLog} from "@/context/CoffeeLogContext";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Card, CardContent, CardHeader, CardTitle,} from "@/components/ui/card";
+import {Slider} from "@/components/ui/slider";
+import {Switch} from "@/components/ui/switch";
+import {Textarea} from "@/components/ui/textarea";
+import {useRouter} from "next/navigation";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
+import {BEVERAGE_TYPES} from "@/lib/consts/beverage-types";
 import StarRating from "@/components/star-rating";
-import { Calendar as CalendarIcon } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { format, parseISO } from "date-fns";
-import { fr } from "date-fns/locale";
-import { cn } from "@/lib/utils";
+import {Calendar as CalendarIcon, Heart} from "lucide-react";
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
+import {Calendar} from "@/components/ui/calendar";
+import {format, parseISO} from "date-fns";
+import {fr} from "date-fns/locale";
+import {cn} from "@/lib/utils";
 
 type TestFormFields = {
   date: string;
@@ -120,7 +104,7 @@ export default function TestForm() {
   const selectedDate = form.date ? parseISO(form.date) : undefined;
 
   return (
-    <form className="max-w-2xl mx-auto space-y-8" onSubmit={handleSubmit}>
+    <form className="mx-auto space-y-8" onSubmit={handleSubmit}>
       {/* 1. Conditions */}
       <Card>
         <CardHeader>
@@ -432,9 +416,6 @@ export default function TestForm() {
             <span className="text-sm">Niveau : {form.flavor}</span>
           </div>
         </CardContent>
-        <CardFooter>
-
-        </CardFooter>
       </Card>
 
       {/* 4. Avis & favori */}
@@ -443,13 +424,13 @@ export default function TestForm() {
           <CardTitle>Avis & favori</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
-            <div>
-                <label className="block mb-1 font-semibold">Note globale</label>
-                <StarRating
-                    value={form.rating}
-                    onChange={(v) => setForm((f) => ({ ...f, rating: v }))}
-                />
-            </div>
+          <div>
+            <label className="block mb-1 font-semibold">Note globale</label>
+            <StarRating
+              value={form.rating}
+              onChangeAction={(v) => setForm((f) => ({ ...f, rating: v }))}
+            />
+          </div>
           <div>
             <label className="block mb-1 font-semibold">
               Commentaire{" "}
@@ -471,18 +452,20 @@ export default function TestForm() {
             <label htmlFor="fav-switch" className="font-semibold">
               Marquer comme favori
             </label>
+            <Heart
+              className={`h-5 w-5 ${form.favorite ? "text-red-500 fill-red-500" : "text-gray-400 opacity-20"} transition-all duration-200`}
+            />
           </div>
         </CardContent>
       </Card>
 
       {/* Submit */}
-      <div className="flex justify-end">
+      <div className="mt-6 flex justify-end">
         <Button
           type="submit"
-          size="lg"
-          className="bg-amber-700 hover:bg-amber-800 text-white"
+          className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 rounded-lg"
         >
-          Ajouter le test
+          Enregistrer le test
         </Button>
       </div>
     </form>
