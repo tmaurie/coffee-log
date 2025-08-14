@@ -1,5 +1,6 @@
 "use client";
-import {Coffee} from "lucide-react";
+import { Coffee } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function StarRating({
   value,
@@ -26,14 +27,17 @@ export default function StarRating({
             className="p-0.5 cursor-pointer transition-transform duration-150 active:scale-50"
           >
             <Coffee
-              className={`h-${size} w-${size} ${active ? "text-amber-500 fill-amber-100" : "text-gray-500"}`}
+              className={cn(
+                `h-${size} w-${size}`,
+                active ? "text-amber-500 fill-amber-100" : "text-gray-500",
+              )}
               width={size}
               height={size}
             />
           </button>
         );
       })}
-      <span className="text-sm ml-2 text-gray-100">
+      <span className="text-sm ml-2">
         {
           ["😞 Mauvais", "😐 Passable", "🙂 Bon", "😊 Très bon", "😍 Parfait"][
             Math.min(value - 1, 4)

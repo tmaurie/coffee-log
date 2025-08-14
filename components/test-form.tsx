@@ -1,22 +1,32 @@
 "use client";
-import React, {useState} from "react";
-import {useCafeLog} from "@/context/CoffeeLogContext";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Card, CardContent, CardHeader, CardTitle,} from "@/components/ui/card";
-import {Slider} from "@/components/ui/slider";
-import {Switch} from "@/components/ui/switch";
-import {Textarea} from "@/components/ui/textarea";
-import {useRouter} from "next/navigation";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import {BEVERAGE_TYPES} from "@/lib/consts/beverage-types";
+import React, { useState } from "react";
+import { useCafeLog } from "@/context/CoffeeLogContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { BEVERAGE_TYPES } from "@/lib/consts/beverage-types";
 import StarRating from "@/components/star-rating";
-import {Calendar as CalendarIcon, Heart} from "lucide-react";
-import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
-import {Calendar} from "@/components/ui/calendar";
-import {format, parseISO} from "date-fns";
-import {fr} from "date-fns/locale";
-import {cn} from "@/lib/utils";
+import { Calendar as CalendarIcon, Heart } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format, parseISO } from "date-fns";
+import { fr } from "date-fns/locale";
+import { cn } from "@/lib/utils";
 
 type TestFormFields = {
   date: string;
