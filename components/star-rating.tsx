@@ -1,14 +1,15 @@
 "use client";
-import { Star } from "lucide-react";
+import { Coffee } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function StarRating({
   value,
-  onChange,
+  onChangeAction,
   max = 5,
   size = 20,
 }: {
   value: number;
-  onChange: (n: number) => void;
+  onChangeAction: (n: number) => void;
   max?: number;
   size?: number;
 }) {
@@ -21,22 +22,27 @@ export default function StarRating({
           <button
             key={n}
             type="button"
-            onClick={() => onChange(n)}
+            onClick={() => onChangeAction(n)}
             aria-label={`${n} étoile${n > 1 ? "s" : ""}`}
-            className="p-0.5"
+            className="p-0.5 cursor-pointer transition-transform duration-150 active:scale-50"
           >
-            <Star
-              className={
-                active ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-              }
+            <Coffee
+              className={cn(
+                `h-${size} w-${size}`,
+                active ? "text-amber-500 fill-amber-100" : "text-gray-500",
+              )}
               width={size}
               height={size}
             />
           </button>
         );
       })}
-      <span className="ml-2 text-sm">
-        {value}/{max}
+      <span className="text-sm ml-2">
+        {
+          ["😞 Mauvais", "😐 Passable", "🙂 Bon", "😊 Très bon", "😍 Parfait"][
+            Math.min(value - 1, 4)
+          ]
+        }
       </span>
     </div>
   );

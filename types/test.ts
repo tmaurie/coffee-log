@@ -15,7 +15,9 @@ export type Test = {
   intensity: number; // 1-5
   bitterness: number; // 1-5
   acidity: number; // 1-5
+  flavor: number; // 1-5
   rating: number; // 1-5
   comment?: string;
   favorite?: boolean;
+  createdAt?: string;
 };

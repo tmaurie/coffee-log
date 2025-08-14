@@ -36,7 +36,11 @@ export default function Home() {
               Dernier test
               {lastTest && lastTest.favorite && (
                 <Badge variant="secondary">
-                  Favori <Heart className="inline-block ml-1 text-red-500" fill="currentColor" />
+                  Favori{" "}
+                  <Heart
+                    className="inline-block ml-1 text-red-500"
+                    fill="currentColor"
+                  />
                 </Badge>
               )}
             </CardTitle>
