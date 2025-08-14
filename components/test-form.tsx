@@ -23,7 +23,16 @@ import {
 } from "@/components/ui/select";
 import { BEVERAGE_TYPES } from "@/lib/consts/beverage-types";
 import StarRating from "@/components/star-rating";
-import { Separator } from "@radix-ui/react-select";
+import { Calendar as CalendarIcon } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format, parseISO } from "date-fns";
+import { fr } from "date-fns/locale";
+import { cn } from "@/lib/utils";
 
 type TestFormFields = {
   date: string;
@@ -41,6 +50,7 @@ type TestFormFields = {
   intensity: number;
   bitterness: number;
   acidity: number;
+  flavor: number;
   rating: number;
   comment: string;
   favorite: boolean;
@@ -62,6 +72,7 @@ const defaultForm: TestFormFields = {
   intensity: 3,
   bitterness: 3,
   acidity: 3,
+  flavor: 3,
   rating: 3,
   comment: "",
   favorite: false,
@@ -105,6 +116,8 @@ export default function TestForm() {
   };
 
   const { coffees, machines } = useCafeLog();
+  const toISODate = (d: Date) => d.toISOString().slice(0, 10);
+  const selectedDate = form.date ? parseISO(form.date) : undefined;
 
   return (
     <form className="max-w-2xl mx-auto space-y-8" onSubmit={handleSubmit}>
@@ -114,16 +127,38 @@ export default function TestForm() {
           <CardTitle>Conditions du test</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">
-          <div>
+          <div className="space-y-1">
             <label className="block mb-1 font-semibold">Date</label>
-            <Input
-              type="date"
-              name="date"
-              value={form.date}
-              onChange={handleChange}
-              required
-            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-full pl-3 text-left font-normal",
+                    !selectedDate && "text-muted-foreground",
+                  )}
+                >
+                  {selectedDate ? (
+                    format(selectedDate, "PPP", { locale: fr })
+                  ) : (
+                    <span>Sélectionner une date</span>
+                  )}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={(d) =>
+                    d && setForm((f) => ({ ...f, date: toISODate(d) }))
+                  }
+                  locale={fr}
+                />
+              </PopoverContent>
+            </Popover>
           </div>
+
           <div>
             <label className="block mb-1 font-semibold">Café</label>
             <Select
@@ -385,16 +420,20 @@ export default function TestForm() {
             />
             <span className="text-sm">Niveau : {form.acidity}</span>
           </div>
-        </CardContent>
-        <Separator className="border-t" />
-        <CardFooter>
           <div>
-            <label className="block mb-1 font-semibold">Note globale</label>
-            <StarRating
-              value={form.rating}
-              onChange={(v) => setForm((f) => ({ ...f, rating: v }))}
+            <label className="block mb-1 font-semibold">Goût</label>
+            <Slider
+              min={1}
+              max={5}
+              step={1}
+              value={[form.flavor]}
+              onValueChange={(v) => handleSlider("flavor", v)}
             />
+            <span className="text-sm">Niveau : {form.flavor}</span>
           </div>
+        </CardContent>
+        <CardFooter>
+
         </CardFooter>
       </Card>
 
@@ -404,6 +443,13 @@ export default function TestForm() {
           <CardTitle>Avis & favori</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
+            <div>
+                <label className="block mb-1 font-semibold">Note globale</label>
+                <StarRating
+                    value={form.rating}
+                    onChange={(v) => setForm((f) => ({ ...f, rating: v }))}
+                />
+            </div>
           <div>
             <label className="block mb-1 font-semibold">
               Commentaire{" "}

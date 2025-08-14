@@ -59,6 +59,7 @@ export const tests = pgTable("tests", {
   intensity: integer("intensity").notNull(),
   bitterness: integer("bitterness").notNull(),
   acidity: integer("acidity").notNull(),
+  flavor: integer("flavor").notNull(),
   rating: integer("rating").notNull(),
   comment: varchar("comment", { length: 255 }),
   favorite: boolean("favorite").default(false),
