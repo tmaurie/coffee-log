@@ -22,9 +22,9 @@ export const navlink = {
 
 export default function HeaderClient() {
   const { data: session, status } = useSession();
+  const email = session?.user?.email;
   const displayName = session?.user?.name ?? session?.user?.email;
   const { theme, toggleTheme } = useTheme();
-  const email = session?.user?.email;
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 shadow-sm backdrop-blur">
@@ -47,10 +47,13 @@ export default function HeaderClient() {
           </div>
         </div>
         <div className="flex items-center gap-2 text-sm">
-          {status === "loading" ? null : email ? (
+          {status === "loading" ? null : email && displayName ? (
             <>
               <span className="hidden sm:inline">
-                Bienvenue, <strong>{displayName}</strong>
+                Bienvenue,{" "}
+                <strong>
+                  {displayName.charAt(0).toUpperCase() + displayName?.slice(1)}
+                </strong>
               </span>
               <Button
                 variant="ghost"
