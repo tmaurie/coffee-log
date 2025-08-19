@@ -110,7 +110,7 @@ export default function TestsPage() {
                 case "rating_desc":
                     return (b.rating ?? -Infinity) - (a.rating ?? -Infinity);
                 case "rating_asc":
-                    return (a.rating ?? Infinity) - (b.rating ?? Infinity);
+                    return (a.rating ?? 0) - (b.rating ?? 0);
                 case "date_desc":
                 default:
                     return new Date(b.date).getTime() - new Date(a.date).getTime();
