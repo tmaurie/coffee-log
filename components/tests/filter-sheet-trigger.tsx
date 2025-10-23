@@ -11,8 +11,8 @@ import {
   SheetFooter,
   SheetClose,
 } from "@/components/ui/sheet";
-import type { TestFilters, TestItem } from "./types";
 import FiltersForm from "@/components/tests/filter-form";
+import { TestFilters, TestItem } from "@/types/test";
 
 function countActive(f: TestFilters) {
   let n = 0;

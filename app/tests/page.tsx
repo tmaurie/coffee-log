@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Heart, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -10,9 +10,10 @@ import { useCafeLog } from "@/context/CoffeeLogContext";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { defaultFilters, TestFilters } from "@/types/test";
+import { useFiltersUrlSync } from "@/lib/hooks/useFilterUrlSync";
+import ActiveFilterChips from "@/components/tests/active-filter-chips";
 import FiltersForm from "@/components/tests/filter-form";
-import FiltersSheetTrigger from "@/components/tests/filter-sheet-trigger";
-import {TestFilters} from "@/components/tests/types";
 
 const dateFormatter = (d: string | Date) =>
   format(typeof d === "string" ? new Date(d) : d, "d MMMM yyyy", {
@@ -38,7 +39,6 @@ function TestCard({ test }: { test: any }) {
   const {
     id,
     date,
-    favorite = false,
     cafe = "Café inconnu",
     machine = "Machine inconnue",
     beverageType = "—",
@@ -55,18 +55,12 @@ function TestCard({ test }: { test: any }) {
             <Badge variant="outline" className="text-xs">
               {dateFormatter(date)}
             </Badge>
-            <div className="text-xs text-gray-500 flex items-center gap-2">
-              <Badge variant="secondary" className={ratingTone(rating)}>
-                Note : {rating ?? "—"}/5
-              </Badge>
-              <div className="flex items-center gap-2">
-                <Heart
-                  className={`${test.favorite ? "text-red-500" : "text-gray-400 opacity-20"}`}
-                  size={16}
-                  fill={test.favorite ? "currentColor" : "none"}
-                />
-              </div>
-            </div>
+            <Badge
+              variant="secondary"
+              className={`text-xs ${ratingTone(rating)}`}
+            >
+              Note : {rating ?? "—"}/5
+            </Badge>
           </div>
         </CardHeader>
         <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
@@ -91,18 +85,11 @@ function TestCard({ test }: { test: any }) {
 export default function TestsPage() {
   const { tests } = useCafeLog();
 
-  const [filters, setFilters] = useState<TestFilters>({
-    query: "",
-    beverageType: null,
-    machine: null,
-    minRating: 0,
-    favoritesOnly: false,
-    sort: "date_desc",
-  });
+  const [filters, setFilters] = useState<TestFilters>(defaultFilters);
+  useFiltersUrlSync(filters, setFilters);
 
   const filteredSorted = useMemo(() => {
     const data = Array.isArray(tests) ? tests : [];
-
     const matches = data.filter((t) => {
       if (filters.favoritesOnly && !t.favorite) return false;
       if (filters.beverageType && t.beverageType !== filters.beverageType)
@@ -110,7 +97,6 @@ export default function TestsPage() {
       if (filters.machine && t.machine !== filters.machine) return false;
       if ((filters.minRating ?? 0) > 0 && (t.rating ?? 0) < filters.minRating)
         return false;
-
       if (filters.query.trim()) {
         const q = filters.query.toLowerCase();
         const hay = [t.cafe ?? "", t.machine ?? "", t.beverageType ?? ""]
@@ -121,69 +107,58 @@ export default function TestsPage() {
       return true;
     });
 
-    return [...matches].sort((a, b) => {
+    return matches.sort((a, b) => {
       switch (filters.sort) {
         case "date_asc":
           return new Date(a.date).getTime() - new Date(b.date).getTime();
         case "rating_desc":
           return (b.rating ?? -Infinity) - (a.rating ?? -Infinity);
         case "rating_asc":
-          return (a.rating ?? 0) - (b.rating ?? 0);
+          return (a.rating ?? Infinity) - (b.rating ?? Infinity);
         case "date_desc":
         default:
           return new Date(b.date).getTime() - new Date(a.date).getTime();
       }
     });
   }, [tests, filters]);
-  const resetFilters = () =>
-    setFilters({
-      query: "",
-      beverageType: null,
-      machine: null,
-      minRating: 0,
-      favoritesOnly: false,
-      sort: "date_desc",
-    });
+
+  const resetFilters = () => setFilters(defaultFilters);
 
   return (
     <main className="mx-auto p-6 max-w-6xl">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <h1 className="text-2xl font-bold">Mes tests café</h1>
-        <div className="flex items-center gap-2">
-          {/* Bouton Filtrer (mobile) */}
-          <FiltersSheetTrigger
-            tests={Array.isArray(tests) ? tests : []}
-            value={filters}
-            onChange={setFilters}
-            onReset={resetFilters}
-          />
-          {/* Bouton Ajouter */}
-          <Button
-            asChild
-            className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold"
-          >
-            <Link href="/tests/new">
-              <Plus className="mr-2 h-4 w-4" />
-              Ajouter
-            </Link>
-          </Button>
-        </div>
+        <Button
+          asChild
+          className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold"
+        >
+          <Link href="/tests/new">
+            <Plus className="mr-2 h-4 w-4" />
+            Ajouter
+          </Link>
+        </Button>
       </div>
 
+      <ActiveFilterChips
+        value={filters}
+        onChange={setFilters}
+        onReset={resetFilters}
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)] gap-6">
-        {/* Sidebar (desktop) */}
         <aside className="hidden md:block">
           <div className="sticky top-20 rounded-xl border p-3">
             <div className="flex items-center justify-between mb-2">
               <h2 className="font-semibold">Filtres</h2>
               <Button variant="ghost" size="sm" onClick={resetFilters}>
-                Reset
+                Réinitialiser
               </Button>
             </div>
             <FiltersForm
               tests={Array.isArray(tests) ? tests : []}
               value={filters}
               onChange={setFilters}
+              dense={false}
             />
           </div>
         </aside>
