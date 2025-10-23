@@ -7,3 +7,9 @@
 /dataSources/
 /dataSources.local.xml
 /vcs.xml
+/copilot.data.migration.agent.xml
+/copilot.data.migration.ask.xml
+/copilot.data.migration.edit.xml
+/data_source_mapping.xml
+/dataSources.xml
+/sqldialects.xml
