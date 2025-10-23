@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   buildSearchParamsFromFilters,
   parseFiltersFromSearchParams,
   shallowEqualFilters,
 } from "@/lib/filter-url";
 import { TestFilters } from "@/types/test";
+import { useSafeSearchParams } from "@/lib/hooks/useSafeSearchParams";
 
 export function useFiltersUrlSync(
   filters: TestFilters,
@@ -15,7 +16,7 @@ export function useFiltersUrlSync(
 ) {
   const router = useRouter();
   const pathname = usePathname();
-  const sp = useSearchParams();
+  const sp = useSafeSearchParams();
 
   React.useEffect(() => {
     const fromUrl = parseFiltersFromSearchParams(
