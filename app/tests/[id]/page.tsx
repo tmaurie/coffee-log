@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useCafeLog } from "@/context/CoffeeLogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Coffee, Filter, Star, ToolCase } from "lucide-react";
+import { Coffee, Filter, Heart, ToolCase } from "lucide-react";
 
 export default function TestDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -42,7 +42,13 @@ export default function TestDetailPage() {
             <div className="flex gap-2 items-center">
               {test.cafe}
               {test.favorite && (
-                <Badge className="bg-yellow-400 text-yellow-900">Favori</Badge>
+                <Badge variant="secondary">
+                  Favori{" "}
+                  <Heart
+                    className="inline-block ml-1 text-red-500"
+                    fill="currentColor"
+                  />
+                </Badge>
               )}
             </div>
             <Badge variant="outline" className="text-xs">
@@ -71,8 +77,15 @@ export default function TestDetailPage() {
           <div className="flex gap-4 items-center">
             <span className="text-lg font-semibold">Note</span>
             <span className="flex items-center gap-1">
-              <Star className="h-5 w-5 text-yellow-500" fill="#facc15" />
-              {test.rating} / 5
+              {Array.from({ length: 5 }, (_, i) => (
+                <Coffee
+                  key={i}
+                  className={
+                    i < test.rating ? "text-amber-500" : "text-gray-300"
+                  }
+                  size={20}
+                />
+              ))}
             </span>
           </div>
           <div className="grid md:grid-cols-2 gap-3">

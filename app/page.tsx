@@ -128,7 +128,7 @@ export default function Home() {
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
                 <Heart className="text-2xl mb-2 text-red-500" />
-                <div>Favoris</div>
+                <div>Mes favoris</div>
                 <div className="text-xs text-gray-500 mt-1 relative z-10">
                   {tests.filter((test) => test.favorite).length} test
                   {tests.filter((test) => test.favorite).length > 1 ? "s" : ""}
