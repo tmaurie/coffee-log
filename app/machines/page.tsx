@@ -14,14 +14,14 @@ export default function MachinesPage() {
       <div className="flex justify-end mb-4">
         <Link
           href="/machines/new"
-          className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg"
+          className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold px-4 py-2 rounded-lg"
         >
           + Ajouter une machine
         </Link>
       </div>
 
       {(!machines || machines.length === 0) && (
-        <div className="text-gray-400 text-center py-10">
+        <div className="text-muted-foreground text-center py-10">
           Aucune machine référencée pour l’instant…
         </div>
       )}

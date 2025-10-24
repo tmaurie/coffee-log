@@ -42,6 +42,13 @@ function passwordScore(pw: string) {
 
 function StrengthBar({ value }: { value: number }) {
   const labels = ["Très faible", "Faible", "Correct", "Bon", "Fort"];
+  const tones = [
+    "bg-destructive",
+    "bg-destructive/80",
+    "bg-accent",
+    "bg-secondary",
+    "bg-primary",
+  ];
   return (
     <div className="space-y-2 mt-2">
       <div className="flex gap-1">
@@ -49,20 +56,12 @@ function StrengthBar({ value }: { value: number }) {
           <div
             key={i}
             className={`h-1.5 flex-1 rounded ${
-              i <= value
-                ? [
-                    "bg-red-500",
-                    "bg-orange-400",
-                    "bg-yellow-400",
-                    "bg-blue-400",
-                    "bg-emerald-500",
-                  ][value]
-                : "bg-zinc-300 dark:bg-zinc-700"
+              i <= value ? tones[value] ?? "bg-primary" : "bg-muted"
             }`}
           />
         ))}
       </div>
-      <div className="text-xs text-zinc-500">{labels[value]}</div>
+      <div className="text-xs text-muted-foreground">{labels[value]}</div>
     </div>
   );
 }
@@ -210,7 +209,7 @@ export default function RegisterPage() {
               required
             />
             {!!email && !emailValid && (
-              <p className="text-xs text-red-600">Format d’email invalide</p>
+              <p className="text-xs text-destructive">Format d’email invalide</p>
             )}
           </div>
 
@@ -231,23 +230,23 @@ export default function RegisterPage() {
               />
               <div className="absolute right-2 top-1/2 -translate-y-1/2">
                 {nameStatus === "checking" && (
-                  <Loader2 className="h-4 w-4 animate-spin text-zinc-400" />
+                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                 )}
                 {nameStatus === "available" && (
-                  <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
                 )}
                 {nameStatus === "taken" && (
-                  <XCircle className="h-4 w-4 text-red-500" />
+                  <XCircle className="h-4 w-4 text-destructive" />
                 )}
               </div>
             </div>
             {!!username && !usernameValid && (
-              <p className="text-xs text-red-600">
+              <p className="text-xs text-destructive">
                 3–20 caractères, lettres/chiffres/._-
               </p>
             )}
             {nameStatus === "taken" && (
-              <p className="text-xs text-red-600">
+              <p className="text-xs text-destructive">
                 Ce nom d’utilisateur est déjà pris
               </p>
             )}
@@ -308,7 +307,7 @@ export default function RegisterPage() {
               required
             />
             {!!confirm && !passwordsMatch && (
-              <p className="text-xs text-red-600">
+              <p className="text-xs text-destructive">
                 Les mots de passe ne correspondent pas
               </p>
             )}
@@ -321,14 +320,14 @@ export default function RegisterPage() {
               checked={consent}
               onCheckedChange={(v) => setConsent(!!v)}
             />
-            <Label htmlFor="consent" className="text-sm text-zinc-600 flex ">
+            <Label htmlFor="consent" className="text-sm text-muted-foreground flex ">
               J’accepte les&nbsp; CGU &nbsp;et la&nbsp; Politique de
               confidentialité.
             </Label>
           </div>
 
           {/* Error global */}
-          {error && <div className="text-red-600 text-sm">{error}</div>}
+          {error && <div className="text-destructive text-sm">{error}</div>}
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? (
@@ -341,8 +340,8 @@ export default function RegisterPage() {
           </Button>
         </form>
 
-        <div className="text-sm text-zinc-500 mt-4 text-center">
-          <p className="text-sm text-zinc-500">
+        <div className="text-sm text-muted-foreground mt-4 text-center">
+          <p className="text-sm text-muted-foreground">
             Déjà un compte ?{" "}
             <Button
               variant="link"

@@ -14,14 +14,14 @@ export default function CafesPage() {
 
       <div className="flex justify-end mb-4">
         <Link href="/coffees/new">
-          <Button className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold px-4 py-2 rounded-lg">
+          <Button className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold px-4 py-2 rounded-lg">
             + Ajouter un café
           </Button>
         </Link>
       </div>
 
       {(!coffees || coffees.length === 0) && (
-        <div className="text-gray-400 text-center py-10">
+        <div className="text-muted-foreground text-center py-10">
           Aucun café référencé pour l’instant…
         </div>
       )}
@@ -35,7 +35,7 @@ export default function CafesPage() {
             description={cafe.description}
             tags={cafe.tags}
             right={
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-muted-foreground">
                 {cafe.roastLevel ?? "N/A"} &bull; {cafe.rating ?? "-"}/5
               </span>
             }

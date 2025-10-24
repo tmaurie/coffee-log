@@ -307,7 +307,7 @@ export default function TestForm() {
           <div>
             <label className="block mb-1 font-semibold">
               Quantité d’eau (ml){" "}
-              <span className="text-xs text-gray-500">(10-500 ml)</span>
+              <span className="text-xs text-muted-foreground">(10-500 ml)</span>
             </label>
             <Input
               type="number"
@@ -444,7 +444,7 @@ export default function TestForm() {
           <div>
             <label className="block mb-1 font-semibold">
               Commentaire{" "}
-              <span className="text-xs text-gray-500">(optionnel)</span>
+              <span className="text-xs text-muted-foreground">(optionnel)</span>
             </label>
             <Textarea
               name="comment"
@@ -463,7 +463,7 @@ export default function TestForm() {
               Marquer comme favori
             </label>
             <Heart
-              className={`h-5 w-5 ${form.favorite ? "text-red-500 fill-red-500" : "text-gray-400 opacity-20"} transition-all duration-200`}
+              className={`h-5 w-5 ${form.favorite ? "text-destructive fill-destructive" : "text-muted-foreground opacity-20"} transition-all duration-200`}
             />
           </div>
         </CardContent>
@@ -473,7 +473,7 @@ export default function TestForm() {
       <div className="mt-6 flex justify-end">
         <Button
           type="submit"
-          className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 rounded-lg"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-lg"
         >
           Enregistrer le test
         </Button>

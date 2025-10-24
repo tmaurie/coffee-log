@@ -76,7 +76,7 @@ export default function TagInput({
               type="button"
               aria-label={`Supprimer ${tag}`}
               onClick={() => removeTag(tag)}
-              className="hover:text-amber-600"
+              className="hover:text-destructive"
             >
               <Trash className="h-3 w-3" />
             </button>

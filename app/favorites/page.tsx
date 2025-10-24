@@ -15,7 +15,7 @@ export default function FavorisPage() {
       <h1 className="text-2xl font-bold mb-8">Mes favoris</h1>
 
       {favoris.length === 0 && (
-        <div className="text-gray-400 text-center py-10">
+        <div className="text-muted-foreground text-center py-10">
           Aucun test favori pour l’instant…
         </div>
       )}
@@ -29,11 +29,11 @@ export default function FavorisPage() {
                   <div className="font-semibold text-lg flex items-center gap-2">
                     {test.cafe}
                     <Star
-                      className="inline h-5 w-5 text-yellow-500"
-                      fill="#facc15"
+                      className="inline h-5 w-5 text-primary"
+                      fill="currentColor"
                     />
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-muted-foreground">
                     {test.machine} &bull; {test.beverageType} &bull; {test.date}
                   </div>
                 </div>

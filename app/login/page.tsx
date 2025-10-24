@@ -129,7 +129,7 @@ export default function LoginPage() {
           </div>
 
           {/* Erreur globale */}
-          {err && <div className="text-red-600 text-sm">{err}</div>}
+          {err && <div className="text-destructive text-sm">{err}</div>}
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? (
@@ -141,7 +141,7 @@ export default function LoginPage() {
             )}
           </Button>
 
-          <div className="flex items-center justify-between text-sm text-zinc-500">
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
             <Button
               type="button"
               variant="link"

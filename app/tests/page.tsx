@@ -30,9 +30,9 @@ const relativeFormatter = (d?: string | Date) =>
 
 function ratingTone(rating?: number) {
   if (rating == null) return "bg-muted text-muted-foreground";
-  if (rating >= 4) return "bg-green-100 text-green-800";
-  if (rating >= 3) return "bg-yellow-100 text-yellow-800";
-  return "bg-red-100 text-red-800";
+  if (rating >= 4) return "bg-primary/10 text-primary";
+  if (rating >= 3) return "bg-accent text-accent-foreground";
+  return "bg-destructive/10 text-destructive";
 }
 
 function TestCard({ test }: { test: any }) {
@@ -66,7 +66,7 @@ function TestCard({ test }: { test: any }) {
         <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
           <div className="flex-1">
             <div className="font-semibold text-lg line-clamp-1">{cafe}</div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-muted-foreground">
               {machine} &bull; {beverageType}
               {createdAtRel ? (
                 <span className="ml-1 opacity-70">• {createdAtRel}</span>
@@ -137,10 +137,7 @@ export default function TestsPage() {
             onReset={resetFilters}
           />
           {/* Bouton Ajouter */}
-          <Button
-            asChild
-            className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold"
-          >
+          <Button asChild className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold">
             <Link href="/tests/new">
               <Plus className="mr-2 h-4 w-4" />
               Ajouter
