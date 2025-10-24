@@ -12,7 +12,7 @@ import {
   SelectValue,
   SelectItem,
 } from "@/components/ui/select";
-import type { TestFilters, TestItem } from "./types";
+import { TestFilters, TestItem } from "@/types/test";
 
 type Props = {
   tests: TestItem[];
@@ -52,7 +52,7 @@ export default function FiltersForm({ tests, value, onChange, dense }: Props) {
   return (
     <div className="w-full">
       <div className={block}>
-        <div className="space-y-1">
+        <div className="space-y-2">
           <Label htmlFor="q">Recherche</Label>
           <Input
             id="q"
