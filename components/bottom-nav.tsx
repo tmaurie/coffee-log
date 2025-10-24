@@ -26,13 +26,13 @@ const items = [
 
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 bg-white/95 dark:bg-zinc-900/95 border-t border-zinc-200 dark:border-zinc-800 shadow md:hidden flex justify-around items-end py-1">
+    <nav className="fixed bottom-0 inset-x-0 z-50 bg-background/95 dark:bg-background/95 border-t border-border shadow md:hidden flex justify-around items-end py-1">
       {/* Les 2 premiers items */}
       {items.slice(0, 2).map((item) => (
         <Link
           key={item.href}
           href={item.href}
-          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 transition w-10"
+          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-muted-foreground hover:text-primary transition w-10"
         >
           {item.icon}
           <span className="text-[11px]">{item.label}</span>
@@ -42,7 +42,7 @@ export default function BottomNav() {
       {/* Bouton central “Ajouter” */}
       <Link
         href="/tests/new"
-        className="relative -top-6 bg-amber-600 hover:bg-amber-700 text-white rounded-full shadow-lg p-3 border-4 border-white dark:border-zinc-900 flex items-center justify-center transition"
+        className="relative -top-6 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg p-3 border-4 border-background dark:border-background flex items-center justify-center transition"
         aria-label="Ajouter un test"
       >
         <PlusCircle className="w-7 h-7" />
@@ -53,7 +53,7 @@ export default function BottomNav() {
         <Link
           key={item.href}
           href={item.href}
-          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-gray-500 dark:text-gray-300 hover:text-amber-700 dark:hover:text-amber-400 w-10"
+          className="flex flex-col items-center gap-0.5 px-2 py-1 text-xs text-muted-foreground hover:text-primary w-10"
         >
           {item.icon}
           <span className="text-[11px]">{item.label}</span>

@@ -28,14 +28,16 @@ export default function InfoCard({
           <CardTitle className="text-lg">{title}</CardTitle>
           {right}
         </div>
-        {subtitle && <div className="text-xs text-gray-500">{subtitle}</div>}
+        {subtitle && (
+          <div className="text-xs text-muted-foreground">{subtitle}</div>
+        )}
         {tags && tags.length > 0 && (
           <div role="list" className="flex flex-wrap gap-1">
             {tags.map((tag) => (
               <span
                 key={tag}
                 role="listitem"
-                className="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-semibold"
+                className="bg-secondary text-secondary-foreground px-2 py-0.5 rounded text-xs font-semibold"
               >
                 {tag}
               </span>
@@ -45,9 +47,7 @@ export default function InfoCard({
       </CardHeader>
       {description && (
         <CardContent>
-          <div className="text-sm text-gray-600 dark:text-gray-300">
-            {description}
-          </div>
+          <div className="text-sm text-muted-foreground">{description}</div>
         </CardContent>
       )}
     </Card>

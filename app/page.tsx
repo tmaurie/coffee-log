@@ -24,8 +24,13 @@ export default function Home() {
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-8">
       <h1 className="text-3xl font-bold font-serif">
-        Bienvenue sur <span className="text-amber-700">CaféLog</span>
-        {displayName && <span>, {displayName}</span>} !
+        Bienvenue sur <span className="text-primary">CaféLog</span>
+        {displayName && (
+          <span>
+            , {displayName.charAt(0).toUpperCase() + displayName?.slice(1)}
+          </span>
+        )}{" "}
+        !
       </h1>
 
       {/* Dernier test */}
@@ -38,7 +43,7 @@ export default function Home() {
                 <Badge variant="secondary">
                   Favori{" "}
                   <Heart
-                    className="inline-block ml-1 text-red-500"
+                    className="inline-block ml-1 text-destructive"
                     fill="currentColor"
                   />
                 </Badge>
@@ -56,7 +61,7 @@ export default function Home() {
             {lastTest ? (
               <div className="flex flex-col gap-2">
                 <div className="font-bold text-lg">{lastTest.cafe}</div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-muted-foreground">
                   Machine&nbsp;: {lastTest.machine} — {lastTest.beverageType}
                 </div>
                 <div>
@@ -67,8 +72,8 @@ export default function Home() {
                         key={i}
                         className={
                           i < lastTest.rating
-                            ? "text-amber-500"
-                            : "text-gray-400"
+                            ? "text-primary"
+                            : "text-muted-foreground/40"
                         }
                         size={20}
                       />
@@ -76,13 +81,13 @@ export default function Home() {
                   </span>
                 </div>
                 {lastTest.comment && (
-                  <div className="text-sm text-gray-600 italic">
+                  <div className="text-sm text-muted-foreground italic">
                     “{lastTest.comment}”
                   </div>
                 )}
               </div>
             ) : (
-              <div className="text-gray-400">
+              <div className="text-muted-foreground">
                 Aucun test enregistré pour le moment.
               </div>
             )}
@@ -106,9 +111,9 @@ export default function Home() {
           <Link href="/tests">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <TestTubeDiagonal className="text-2xl mb-2 text-blue-300" />
+                <TestTubeDiagonal className="text-2xl mb-2 text-primary" />
                 <div>Mes tests</div>
-                <div className="text-xs text-gray-500 mt-1 relative z-10">
+                <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {tests.length} test{tests.length > 1 ? "s" : ""}
                 </div>
               </CardContent>
@@ -117,9 +122,9 @@ export default function Home() {
           <Link href="/coffees">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <Coffee className="text-2xl mb-2 text-amber-300" />
+                <Coffee className="text-2xl mb-2 text-primary" />
                 <div>Mes cafés</div>
-                <div className="text-xs text-gray-500 mt-1 relative z-10">
+                <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {coffees.length} café{coffees.length > 1 ? "s" : ""}
                 </div>
               </CardContent>
@@ -128,9 +133,9 @@ export default function Home() {
           <Link href="/machines">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <ToolCase className="text-2xl mb-2 text-green-300" />
+                <ToolCase className="text-2xl mb-2 text-secondary-foreground" />
                 <div>Mes machines</div>
-                <div className="text-xs text-gray-500 mt-1 relative z-10">
+                <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {machines.length} machine{machines.length > 1 ? "s" : ""}
                 </div>
               </CardContent>
@@ -139,9 +144,9 @@ export default function Home() {
           <Link href="/favorites">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <Heart className="text-2xl mb-2 text-red-500" />
+                <Heart className="text-2xl mb-2 text-primary" />
                 <div>Mes favoris</div>
-                <div className="text-xs text-gray-500 mt-1 relative z-10">
+                <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {tests.filter((test) => test.favorite).length} test
                   {tests.filter((test) => test.favorite).length > 1 ? "s" : ""}
                 </div>

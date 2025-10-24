@@ -5,6 +5,7 @@ import { useCafeLog } from "@/context/CoffeeLogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coffee, Filter, Heart, ToolCase } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function TestDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -16,10 +17,10 @@ export default function TestDetailPage() {
   if (!test) {
     return (
       <main className="max-w-2xl mx-auto p-8">
-        <div className="text-center text-red-600">Test introuvable…</div>
+        <div className="text-center text-destructive">Test introuvable…</div>
         <button
           onClick={() => router.back()}
-          className="mt-6 px-4 py-2 bg-amber-600 text-white rounded-lg"
+          className="mt-6 px-4 py-2 bg-primary text-primary-foreground rounded-lg"
         >
           Retour
         </button>
@@ -29,12 +30,13 @@ export default function TestDetailPage() {
 
   return (
     <main className="max-w-2xl mx-auto p-8">
-      <button
-        onClick={() => router.back()}
-        className="mb-4 px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-lg text-sm"
+      <Button
+        className="mb-4 px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg text-sm"
+        variant="secondary"
+        onClick={() => router.push("/tests")}
       >
         ← Retour à la liste
-      </button>
+      </Button>
 
       <Card>
         <CardHeader>
@@ -45,7 +47,7 @@ export default function TestDetailPage() {
                 <Badge variant="secondary">
                   Favori{" "}
                   <Heart
-                    className="inline-block ml-1 text-red-500"
+                    className="inline-block ml-1 text-destructive"
                     fill="currentColor"
                   />
                 </Badge>
@@ -59,7 +61,7 @@ export default function TestDetailPage() {
               })}
             </Badge>
           </CardTitle>
-          <div className="text-sm text-gray-500 flex items-center gap-2 mt-2">
+          <div className="text-sm text-muted-foreground flex items-center gap-2 mt-2">
             <Badge variant="secondary">
               <ToolCase /> {test.machine}
             </Badge>
@@ -81,7 +83,9 @@ export default function TestDetailPage() {
                 <Coffee
                   key={i}
                   className={
-                    i < test.rating ? "text-amber-500" : "text-gray-300"
+                    i < test.rating
+                      ? "text-primary"
+                      : "text-muted-foreground/40"
                   }
                   size={20}
                 />
@@ -91,7 +95,7 @@ export default function TestDetailPage() {
           <div className="grid md:grid-cols-2 gap-3">
             <div>
               <span className="block font-semibold mb-1">Conditions</span>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 list-disc ml-4 space-y-1">
+              <ul className="text-sm text-muted-foreground list-disc ml-4 space-y-1">
                 <li>
                   Quantité d’eau : <b>{test.waterQuantity} ml</b>
                 </li>
@@ -125,7 +129,7 @@ export default function TestDetailPage() {
             </div>
             <div>
               <span className="block font-semibold mb-1">Sensoriel</span>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 list-disc ml-4 space-y-1">
+              <ul className="text-sm text-muted-foreground list-disc ml-4 space-y-1">
                 <li>
                   Intensité : <b>{test.intensity}/5</b>
                 </li>

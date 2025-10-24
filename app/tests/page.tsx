@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -52,21 +52,27 @@ function TestCard({ test }: { test: any }) {
       <Card className="hover:shadow-md transition border cursor-pointer">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="secondary" className="text-xs">
               {dateFormatter(date)}
             </Badge>
-            <Badge
-              variant="secondary"
-              className={`text-xs ${ratingTone(rating)}`}
-            >
-              Note : {rating ?? "—"}/5
-            </Badge>
+            <div className="text-xs text-gray-500 flex items-center gap-2">
+              <Badge variant="secondary" className={ratingTone(rating)}>
+                Note : {rating ?? "—"}/5
+              </Badge>
+              <div className="flex items-center gap-2">
+                <Heart
+                  className={`${test.favorite ? "text-red-500" : "text-gray-400 opacity-20"}`}
+                  size={16}
+                  fill={test.favorite ? "currentColor" : "none"}
+                />
+              </div>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
           <div className="flex-1">
             <div className="font-semibold text-lg line-clamp-1">{cafe}</div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-muted-foreground">
               {machine} &bull; {beverageType}
               {createdAtRel ? (
                 <span className="ml-1 opacity-70">• {createdAtRel}</span>
@@ -139,7 +145,7 @@ export default function TestsPage() {
           {/* Bouton Ajouter */}
           <Button
             asChild
-            className="bg-amber-200 hover:bg-amber-300 text-amber-900 font-semibold"
+            className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold"
           >
             <Link href="/tests/new">
               <Plus className="mr-2 h-4 w-4" />

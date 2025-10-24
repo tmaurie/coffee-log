@@ -29,7 +29,9 @@ export default function StarRating({
             <Coffee
               className={cn(
                 `h-${size} w-${size}`,
-                active ? "text-amber-500 fill-amber-100" : "text-gray-500",
+                active
+                  ? "text-primary fill-primary/20"
+                  : "text-muted-foreground",
               )}
               width={size}
               height={size}

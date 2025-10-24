@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Mail, User, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-z0-9._-]{3,20}$/i;
@@ -129,19 +130,19 @@ export default function LoginPage() {
           </div>
 
           {/* Erreur globale */}
-          {err && <div className="text-red-600 text-sm">{err}</div>}
+          {err && <div className="text-destructive text-sm">{err}</div>}
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? (
               <span className="inline-flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" /> Connexion…
+                <Spinner /> Connexion…
               </span>
             ) : (
               "Se connecter"
             )}
           </Button>
 
-          <div className="flex items-center justify-between text-sm text-zinc-500">
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
             <Button
               type="button"
               variant="link"

@@ -27,10 +27,10 @@ export default function HeaderClient() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 shadow-sm backdrop-blur">
+    <header className="sticky top-0 z-50 bg-background/90 dark:bg-background/90 shadow-sm backdrop-blur">
       <nav className="max-w-4xl mx-auto flex items-center justify-between p-4">
         <div className="flex items-center gap-4">
-          <Link href="/" className="font-extrabold text-2xl text-amber-700">
+          <Link href="/" className="font-extrabold text-2xl text-primary">
             CaféLog
           </Link>
           <div className="hidden md:flex items-center gap-2">
