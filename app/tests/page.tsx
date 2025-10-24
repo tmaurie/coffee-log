@@ -14,6 +14,7 @@ import { defaultFilters, TestFilters } from "@/types/test";
 import { useFiltersUrlSync } from "@/lib/hooks/useFilterUrlSync";
 import ActiveFilterChips from "@/components/tests/active-filter-chips";
 import FiltersForm from "@/components/tests/filter-form";
+import FiltersSheetTrigger from "@/components/tests/filter-sheet-trigger";
 
 const dateFormatter = (d: string | Date) =>
   format(typeof d === "string" ? new Date(d) : d, "d MMMM yyyy", {
@@ -144,6 +145,15 @@ export default function TestsPage() {
         onChange={setFilters}
         onReset={resetFilters}
       />
+
+      <div className="md:hidden mb-4">
+        <FiltersSheetTrigger
+          tests={Array.isArray(tests) ? tests : []}
+          value={filters}
+          onChange={setFilters}
+          onReset={resetFilters}
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)] gap-6">
         <aside className="hidden md:block">
