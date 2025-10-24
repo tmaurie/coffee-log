@@ -72,8 +72,8 @@ export default function Home() {
                         key={i}
                         className={
                           i < lastTest.rating
-                            ? "text-amber-500"
-                            : "text-gray-400"
+                            ? "text-primary"
+                            : "text-muted-foreground/40"
                         }
                         size={20}
                       />

@@ -8,14 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
+  CheckCircle2,
   Eye,
   EyeOff,
-  Loader2,
-  CheckCircle2,
-  XCircle,
+  Lock,
   Mail,
   User,
-  Lock,
+  XCircle,
 } from "lucide-react";
 import {
   Card,
@@ -24,6 +23,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Spinner } from "@/components/ui/spinner";
 
 // ── Helpers simples
 
@@ -231,9 +231,7 @@ export default function RegisterPage() {
                 required
               />
               <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                {nameStatus === "checking" && (
-                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                )}
+                {nameStatus === "checking" && <Spinner />}
                 {nameStatus === "available" && (
                   <CheckCircle2 className="h-4 w-4 text-primary" />
                 )}
@@ -337,7 +335,7 @@ export default function RegisterPage() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? (
               <span className="inline-flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" /> Création…
+                <Spinner /> Création…
               </span>
             ) : (
               "S'inscrire"
