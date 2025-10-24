@@ -1,92 +1,80 @@
-# ☕ CaféLog — Roadmap V2 (RAF)
+# ☕ CaféLog
 
-## 🎯 Objectif
-Polisher l'expérience utilisateur (UX/UI), enrichir les données persistées et intégrer les retours clients prioritaires tout en gardant le MVP stable.
-
----
-
-## ✅ Déjà livré en V1
-- Authentification (email + mot de passe) via NextAuth
-- Persistance Neon + Drizzle
-- Gestion Tests / Cafés / Machines / Favoris
-- Création + affichage + suppression avec UI Shadcn
-- Sélecteurs de type (slider, texte, etc.)
-- Typage strict (`NewTest` vs `Test`)
+> Suis, note et améliore tes extractions café comme un vrai barista.
 
 ---
 
-## 📌 V2 — Retours Clients & Améliorations
+## 🌟 Présentation
 
-### 1) **Tests**
-- [ ] **Nouveaux champs** dans `tests` :
-    - Type de filtre (`filterType`) → select (Bottomless, Simple, Double, Pressurisé…)
-    - Quantité de mouture (g) (`doseGrams`)
-    - Pré-infusion (s) (`preinfusionSec`)
-    - Infusion (s) (`extractionSec`)
-    - Finesse de mouture (`grindFineness`) — rename du champ existant
-    - Quantité d’eau (`waterQuantity`) → **optionnelle**
-- [ ] Ajouter une jauge “Goût global” (1–5)
-- [ ] **Edition rapide** depuis la liste (modal ou page `/tests/[id]/edit`)
-- [ ] Ordre des champs optimisé (cf. retours)
+**CaféLog** est une web app moderne construite avec **Next.js 14 + TypeScript + Tailwind + ShadCN UI + Drizzle + Neon PostgreSQL**, pensée pour les passionnés d’espresso et d’extraction manuelle.  
+L’objectif : centraliser tes cafés, machines et tests d’infusion, pour suivre ton évolution et affiner ton palais tasse après tasse.
 
 ---
 
-### 2) **Cafés**
-- [ ] **Nouvelles colonnes** :
-    - Niveau de torréfaction (`roastLevel`) — select (Verte, Moyenne, Foncée, Très Foncée)
-    - Note du café (`rating`) — étoiles (1–5)
-- [ ] Tag input amélioré :
-    - Dé-duplication
-    - Suggestions de tags (fruité, floral, chocolaté…)
-- [ ] Renommer “Description” → “Torréfaction / mélange / avis…”
-- [ ] Recherche par origine
-- [ ] Edition inline depuis la liste
+## 🧭 Fonctionnalités principales
+
+### 🔐 Authentification
+- Création de compte par email + mot de passe
+- Sessions sécurisées (cookies HttpOnly via NextAuth)
+- Pseudo unique pour personnaliser ton espace
+
+### ☕ Tests d’extraction
+- Création et suivi de tes tests avec tous les paramètres essentiels :
+    - Finesse et quantité de mouture, température, eau, temps d’infusion, pré-infusion, pression…
+- Système de **notation** (1–5 étoiles) + **évaluation sensorielle**
+- Sélecteurs intelligents pour cafés et machines existants
+- Détails visuels clairs et responsive design
+
+### 🌱 Cafés & Machines
+- Gestion de ta collection de cafés et de machines
+- **Roast level**, **rating**, **tags aromatiques** (fruité, floral, chocolaté…)
+- Favoris et filtres par type, origine, ou torréfaction
+
+### ⭐ Favoris & recherche
+- Marque tes extractions préférées
+- Filtre et trie par méthode, note, machine ou favoris
+- **Chips actifs** et **persistance des filtres dans l’URL** pour retrouver une vue précise en un clic
 
 ---
 
-### 3) **Machines**
-- [ ] (Faible priorité) Champs spécifiques ou détails supplémentaires à définir
-- [ ] Possible affichage de photo / image
+## 💻 Stack technique
+
+| Côté | Outils |
+|------|---------|
+| **Frontend** | Next.js 14 (App Router), TypeScript, Tailwind CSS, ShadCN UI |
+| **Backend** | API Routes Next.js + Drizzle ORM |
+| **Base de données** | Neon PostgreSQL |
+| **Auth** | NextAuth.js (credentials) |
+| **UI/UX** | Dark/light mode, responsive design, skeletons & toasts |
 
 ---
 
-### 4) **UX & UI**
-- [ ] Feedback visuel amélioré (toasts, skeleton loading, etc.)
-- [ ] Dark mode + thème cohérent
-- [ ] Optimiser ordre tabulation dans les formulaires
-- [ ] Rendre certains champs optionnels + placeholders explicites
+## 📱 Expérience utilisateur
+
+CaféLog est pensé pour être **rapide, minimaliste et agréable à utiliser** :
+- Interface claire, sans friction
+- Navigation fluide entre les sections
+- Données persistées en temps réel
+- Préparation à une **PWA** pour usage hors ligne et ajout sur écran d’accueil
 
 ---
 
-## 🛠 Plan technique
-1. **Migration Drizzle** :
-    - Ajouter les nouvelles colonnes (`tests` + `cafes`)
-    - Rendre certains champs optionnels
-2. **MAJ types TS** (`Test`, `NewTest`, `Coffee`, `NewCoffee`)
-3. **Formulaires** :
-    - Ajouter champs et selects correspondants
-    - Star rating component réutilisable
-4. **API Routes** :
-    - Adapter POST / PATCH pour gérer les nouveaux champs
-5. **Liste & Edition rapide** :
-    - Crayon → modal ou page dédiée
-6. **TagInput amélioré** (UX + suggestions)
-7. **Recherche cafés** (par origine + roastLevel)
+## 🧩 À suivre prochainement (V2+)
+
+Les prochaines versions visent à enrichir la dimension analytique et communautaire de CaféLog :
+- 📊 **Statistiques personnelles** : moyennes, tendances, historique visuel de progression
+- 🏷️ **TagInput UX-friendly** (chips + suggestions intelligentes)
+- 🔍 **Recherche globale** (tous les types confondus)
+- 👤 **Page profil** utilisateur
+- 🌍 **Partage public** de tests
+- 📱 **PWA & appli mobile** (Capacitor / Expo)
 
 ---
 
-## 🚀 Priorisation
-1. Migration + MAJ types
-2. Form Café (roastLevel + rating)
-3. Form Test (nouveaux champs)
-4. Edition rapide depuis les listes
-5. TagInput amélioré
-6. Recherche & filtres
+
+## 📂 Licence
+
+Projet personnel open-source, distribué sous licence MIT.
 
 ---
 
-## 📅 Timeline indicative
-- **Semaine 1** : Migrations + form cafés complet
-- **Semaine 2** : Form tests complet + édition rapide
-- **Semaine 3** : TagInput amélioré + recherche
-- **Semaine 4** : Finitions UI/UX + QA

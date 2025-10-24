@@ -60,8 +60,20 @@ export default function Home() {
                   Machine&nbsp;: {lastTest.machine} — {lastTest.beverageType}
                 </div>
                 <div>
-                  Note&nbsp;:{" "}
-                  <span className="font-mono">{lastTest.rating}/5</span>
+                  <span className="flex items-center gap-1">
+                    Note&nbsp;:{" "}
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <Coffee
+                        key={i}
+                        className={
+                          i < lastTest.rating
+                            ? "text-amber-500"
+                            : "text-gray-400"
+                        }
+                        size={20}
+                      />
+                    ))}
+                  </span>
                 </div>
                 {lastTest.comment && (
                   <div className="text-sm text-gray-600 italic">
