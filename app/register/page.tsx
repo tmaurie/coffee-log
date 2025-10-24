@@ -56,7 +56,7 @@ function StrengthBar({ value }: { value: number }) {
           <div
             key={i}
             className={`h-1.5 flex-1 rounded ${
-              i <= value ? tones[value] ?? "bg-primary" : "bg-muted"
+              i <= value ? (tones[value] ?? "bg-primary") : "bg-muted"
             }`}
           />
         ))}
@@ -209,7 +209,9 @@ export default function RegisterPage() {
               required
             />
             {!!email && !emailValid && (
-              <p className="text-xs text-destructive">Format d’email invalide</p>
+              <p className="text-xs text-destructive">
+                Format d’email invalide
+              </p>
             )}
           </div>
 
@@ -320,7 +322,10 @@ export default function RegisterPage() {
               checked={consent}
               onCheckedChange={(v) => setConsent(!!v)}
             />
-            <Label htmlFor="consent" className="text-sm text-muted-foreground flex ">
+            <Label
+              htmlFor="consent"
+              className="text-sm text-muted-foreground flex "
+            >
               J’accepte les&nbsp; CGU &nbsp;et la&nbsp; Politique de
               confidentialité.
             </Label>

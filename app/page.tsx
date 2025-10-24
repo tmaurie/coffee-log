@@ -25,7 +25,12 @@ export default function Home() {
     <main className="max-w-3xl mx-auto p-6 space-y-8">
       <h1 className="text-3xl font-bold font-serif">
         Bienvenue sur <span className="text-primary">CaféLog</span>
-        {displayName && <span>, {displayName}</span>} !
+        {displayName && (
+          <span>
+            , {displayName.charAt(0).toUpperCase() + displayName?.slice(1)}
+          </span>
+        )}{" "}
+        !
       </h1>
 
       {/* Dernier test */}
@@ -117,7 +122,7 @@ export default function Home() {
           <Link href="/coffees">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <Coffee className="text-2xl mb-2 text-accent-foreground" />
+                <Coffee className="text-2xl mb-2 text-primary" />
                 <div>Mes cafés</div>
                 <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {coffees.length} café{coffees.length > 1 ? "s" : ""}
@@ -139,7 +144,7 @@ export default function Home() {
           <Link href="/favorites">
             <Card className="hover:shadow-md cursor-pointer">
               <CardContent className="flex flex-col items-center justify-center p-4">
-                <Heart className="text-2xl mb-2 text-destructive" />
+                <Heart className="text-2xl mb-2 text-primary" />
                 <div>Mes favoris</div>
                 <div className="text-xs text-muted-foreground mt-1 relative z-10">
                   {tests.filter((test) => test.favorite).length} test

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -30,9 +30,9 @@ const relativeFormatter = (d?: string | Date) =>
 
 function ratingTone(rating?: number) {
   if (rating == null) return "bg-muted text-muted-foreground";
-  if (rating >= 4) return "bg-primary/10 text-primary";
-  if (rating >= 3) return "bg-accent text-accent-foreground";
-  return "bg-destructive/10 text-destructive";
+  if (rating >= 4) return "bg-green-100 text-green-800";
+  if (rating >= 3) return "bg-yellow-100 text-yellow-800";
+  return "bg-red-100 text-red-800";
 }
 
 function TestCard({ test }: { test: any }) {
@@ -52,15 +52,21 @@ function TestCard({ test }: { test: any }) {
       <Card className="hover:shadow-md transition border cursor-pointer">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="secondary" className="text-xs">
               {dateFormatter(date)}
             </Badge>
-            <Badge
-              variant="secondary"
-              className={`text-xs ${ratingTone(rating)}`}
-            >
-              Note : {rating ?? "—"}/5
-            </Badge>
+            <div className="text-xs text-gray-500 flex items-center gap-2">
+              <Badge variant="secondary" className={ratingTone(rating)}>
+                Note : {rating ?? "—"}/5
+              </Badge>
+              <div className="flex items-center gap-2">
+                <Heart
+                  className={`${test.favorite ? "text-red-500" : "text-gray-400 opacity-20"}`}
+                  size={16}
+                  fill={test.favorite ? "currentColor" : "none"}
+                />
+              </div>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="flex flex-col md:flex-row items-start md:items-center gap-2">
@@ -137,7 +143,10 @@ export default function TestsPage() {
             onReset={resetFilters}
           />
           {/* Bouton Ajouter */}
-          <Button asChild className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold">
+          <Button
+            asChild
+            className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold"
+          >
             <Link href="/tests/new">
               <Plus className="mr-2 h-4 w-4" />
               Ajouter

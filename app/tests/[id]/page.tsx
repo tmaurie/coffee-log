@@ -5,6 +5,7 @@ import { useCafeLog } from "@/context/CoffeeLogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coffee, Filter, Heart, ToolCase } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function TestDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -29,12 +30,13 @@ export default function TestDetailPage() {
 
   return (
     <main className="max-w-2xl mx-auto p-8">
-      <button
-        onClick={() => router.back()}
+      <Button
         className="mb-4 px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg text-sm"
+        variant="secondary"
+        onClick={() => router.push("/tests")}
       >
         ← Retour à la liste
-      </button>
+      </Button>
 
       <Card>
         <CardHeader>
