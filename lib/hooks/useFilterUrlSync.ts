@@ -2,13 +2,12 @@
 
 import * as React from "react";
 import { usePathname, useRouter } from "next/navigation";
+import type { TestFilters } from "@/types/test";
 import {
   buildSearchParamsFromFilters,
   parseFiltersFromSearchParams,
   shallowEqualFilters,
-} from "@/lib/filter-url";
-import { TestFilters } from "@/types/test";
-import { useSafeSearchParams } from "@/lib/hooks/useSafeSearchParams";
+} from "../filter-url";
 
 export function useFiltersUrlSync(
   filters: TestFilters,
@@ -16,18 +15,32 @@ export function useFiltersUrlSync(
 ) {
   const router = useRouter();
   const pathname = usePathname();
-  const sp = useSafeSearchParams();
 
   React.useEffect(() => {
+    if (typeof window === "undefined") return;
     const fromUrl = parseFiltersFromSearchParams(
-      new URLSearchParams(sp?.toString() ?? ""),
+      new URLSearchParams(window.location.search),
     );
-
     // @ts-ignore
-    setFilters((current: TestFilters) =>
-      shallowEqualFilters(current, fromUrl) ? current : fromUrl,
-    );
+    setFilters((prev) => (shallowEqualFilters(prev, fromUrl) ? prev : fromUrl));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const onPopState = () => {
+      const sp = new URLSearchParams(window.location.search);
+      const fromUrl = parseFiltersFromSearchParams(sp);
+      // @ts-ignore
+      setFilters((prev) =>
+        shallowEqualFilters(prev, fromUrl) ? prev : fromUrl,
+      );
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [setFilters]);
 
   React.useEffect(() => {
     const id = setTimeout(() => {
