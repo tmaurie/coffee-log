@@ -43,11 +43,11 @@ function passwordScore(pw: string) {
 function StrengthBar({ value }: { value: number }) {
   const labels = ["Très faible", "Faible", "Correct", "Bon", "Fort"];
   const tones = [
-    "bg-destructive",
-    "bg-destructive/80",
-    "bg-accent",
-    "bg-secondary",
-    "bg-primary",
+    "bg-red-500",
+    "bg-orange-400",
+    "bg-yellow-400",
+    "bg-blue-400",
+    "bg-emerald-500",
   ];
   return (
     <div className="space-y-2 mt-2">

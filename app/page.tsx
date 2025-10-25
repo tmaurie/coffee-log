@@ -94,7 +94,11 @@ function DashboardHome() {
           {lastTest && (
             <CardFooter className="justify-end">
               <Link href={`/tests/${lastTest.id}`} passHref>
-                <Button variant="secondary" size="sm" className="flex items-center gap-1">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="flex items-center gap-1"
+                >
                   Voir le détail
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -219,7 +223,7 @@ export default function Home() {
 
   return (
     <main className="relative isolate">
-      <div className="absolute inset-x-0 top-0 -z-10 overflow-hidden">
+      <div className="absolute inset-x-0 top-0 -z-10">
         <div className="mx-auto h-64 w-[36rem] rounded-full bg-primary/10 blur-3xl" />
       </div>
       <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
@@ -232,8 +236,8 @@ export default function Home() {
           </h1>
           <p className="mx-auto max-w-2xl text-base md:text-lg text-muted-foreground">
             CaféLog vous aide à garder une trace de vos tests, à comprendre vos
-            réglages et à construire votre référentiel sensoriel. Un outil moderne,
-            sobre et pensé pour l'excellence tasse après tasse.
+            réglages et à construire votre référentiel sensoriel. Un outil
+            moderne, sobre et pensé pour l'excellence tasse après tasse.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link href="/register">
@@ -242,7 +246,11 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/login">
-              <Button variant="ghost" size="lg" className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="flex items-center gap-2"
+              >
                 Se connecter
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -270,17 +278,26 @@ export default function Home() {
             <p className="text-muted-foreground">
               Créez vos profils de cafés, suivez l'évolution de vos machines et
               capturez vos sensations en un clin d'œil. CaféLog centralise vos
-              données pour vous permettre d'apprendre, d'expérimenter et de partager
-              vos trouvailles avec votre équipe ou votre communauté.
+              données pour vous permettre d'apprendre, d'expérimenter et de
+              partager vos trouvailles avec votre équipe ou votre communauté.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Badge variant="outline" className="flex items-center gap-2 px-4 py-2">
+              <Badge
+                variant="outline"
+                className="flex items-center gap-2 px-4 py-2"
+              >
                 <Coffee className="h-4 w-4" /> Cafés, profils et notes
               </Badge>
-              <Badge variant="outline" className="flex items-center gap-2 px-4 py-2">
+              <Badge
+                variant="outline"
+                className="flex items-center gap-2 px-4 py-2"
+              >
                 <ToolCase className="h-4 w-4" /> Machines & moulins
               </Badge>
-              <Badge variant="outline" className="flex items-center gap-2 px-4 py-2">
+              <Badge
+                variant="outline"
+                className="flex items-center gap-2 px-4 py-2"
+              >
                 <Sparkles className="h-4 w-4" /> Sensations et favoris
               </Badge>
             </div>
@@ -291,7 +308,8 @@ export default function Home() {
                 Ce que vous allez aimer
               </CardTitle>
               <CardDescription>
-                Trois raisons qui font de CaféLog votre tableau de bord quotidien.
+                Trois raisons qui font de CaféLog votre tableau de bord
+                quotidien.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -318,7 +336,8 @@ export default function Home() {
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground">
             Rejoignez la communauté CaféLog et donnez de la profondeur à vos
-            dégustations. Commencez un journal qui vous suit dans chaque micro-ajustement.
+            dégustations. Commencez un journal qui vous suit dans chaque
+            micro-ajustement.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link href="/register">
@@ -327,7 +346,11 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/login">
-              <Button variant="outline" size="lg" className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="lg"
+                className="flex items-center gap-2"
+              >
                 Déjà inscrit ?
                 <ArrowRight className="h-4 w-4" />
               </Button>
