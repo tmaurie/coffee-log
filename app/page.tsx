@@ -13,161 +13,332 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { useCafeLog } from "@/context/CoffeeLogContext";
 import {
   ArrowRight,
   Bean,
+  CalendarClock,
   CheckCircle2,
   Coffee,
   Heart,
+  MapPin,
   PlusCircle,
   Sparkles,
+  Star,
   TestTubeDiagonal,
   TimerReset,
   ToolCase,
 } from "lucide-react";
 
+function formatTestDate(date?: string) {
+  if (!date) return "Date inconnue";
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return "Date inconnue";
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(parsed);
+}
+
 function DashboardHome() {
   const { tests, coffees, machines } = useCafeLog();
 
   const lastTest = tests.length ? tests[tests.length - 1] : null;
+  const favoritesCount = tests.filter((test) => test.favorite).length;
+  const recentTests = [...tests]
+    .slice(-3)
+    .reverse();
+
+  const stats = [
+    {
+      label: "Tests réalisés",
+      value: tests.length,
+      icon: TestTubeDiagonal,
+      accent: "text-primary",
+    },
+    {
+      label: "Cafés référencés",
+      value: coffees.length,
+      icon: Coffee,
+      accent: "text-amber-500",
+    },
+    {
+      label: "Machines suivies",
+      value: machines.length,
+      icon: ToolCase,
+      accent: "text-secondary-foreground",
+    },
+    {
+      label: "Tests favoris",
+      value: favoritesCount,
+      icon: Heart,
+      accent: "text-destructive",
+    },
+  ];
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold font-serif">
-        Bienvenue sur <span className="text-primary">CaféLog</span> !
-      </h1>
-
-      {/* Dernier test */}
-      <section>
-        <Card>
-          <CardHeader className="flex flex-col md:flex-row items-start md:items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              Dernier test
-              {lastTest && lastTest.favorite && (
-                <Badge variant="secondary">
-                  Favori
-                  <Heart
-                    className="inline-block ml-1 text-destructive"
-                    fill="currentColor"
-                    size={14}
-                  />
-                </Badge>
-              )}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {lastTest ? (
-              <div className="flex flex-col gap-2">
-                <div className="font-bold text-lg">{lastTest.cafe}</div>
-                <div className="text-sm text-muted-foreground">
-                  Machine : {lastTest.machine} — {lastTest.beverageType}
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">Note</span>
-                  <span className="flex items-center gap-1">
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <Coffee
-                        key={i}
-                        className={
-                          i < lastTest.rating
-                            ? "text-primary"
-                            : "text-muted-foreground/40"
-                        }
-                        size={18}
-                      />
-                    ))}
-                  </span>
-                </div>
-                {lastTest.comment && (
-                  <div className="text-sm text-muted-foreground italic">
-                    “{lastTest.comment}”
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="text-muted-foreground">
-                Aucun test enregistré pour le moment.
-              </div>
-            )}
-          </CardContent>
-          {lastTest && (
-            <CardFooter className="justify-end">
-              <Link href={`/tests/${lastTest.id}`} passHref>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="flex items-center gap-1"
-                >
-                  Voir le détail
-                  <ArrowRight className="h-4 w-4" />
+    <div className="relative isolate">
+      <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent blur-3xl" />
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 py-12">
+        <section className="grid gap-6 rounded-3xl border border-border/50 bg-background/60 p-8 shadow-sm backdrop-blur md:grid-cols-[1.3fr,1fr]">
+          <div className="space-y-6">
+            <Badge variant="secondary" className="w-fit uppercase tracking-wide">
+              Tableau de bord
+            </Badge>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-serif font-semibold md:text-4xl">
+                Ravie de vous retrouver sur <span className="text-primary">CaféLog</span>
+              </h1>
+              <p className="text-base text-muted-foreground md:text-lg">
+                Visualisez vos dernières extractions, gardez vos favoris à portée de main et lancez un nouveau test en un clin d'œil.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link href="/tests/new">
+                <Button size="lg" className="flex items-center gap-2">
+                  <PlusCircle className="h-5 w-5" />
+                  Ajouter un test
                 </Button>
               </Link>
-            </CardFooter>
-          )}
-        </Card>
-      </section>
-
-      {/* Bouton ajouter un test */}
-      <div className="flex justify-center">
-        <Link href="/tests/new">
-          <Button size="lg" className="flex items-center gap-2">
-            <PlusCircle className="h-5 w-5" /> Ajouter un test
-          </Button>
-        </Link>
-      </div>
-
-      {/* Accès rapides */}
-      <section>
-        <h2 className="text-xl font-semibold font-serif mb-4">Accès rapide</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/tests">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                <TestTubeDiagonal className="mb-2 text-primary" />
-                <div className="font-medium">Mes tests</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {tests.length} test{tests.length > 1 ? "s" : ""}
+              <Link href="/tests">
+                <Button variant="outline" size="lg" className="flex items-center gap-2">
+                  <CalendarClock className="h-5 w-5" />
+                  Historique complet
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <Card className="border-0 bg-muted/40">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base font-semibold uppercase tracking-wide text-muted-foreground">
+                Vue rapide
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 gap-4">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-border/60 bg-background/80 p-4 shadow-sm"
+                >
+                  <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <stat.icon className={`h-4 w-4 ${stat.accent}`} />
+                    {stat.label}
+                  </div>
+                  <p className="mt-3 text-2xl font-semibold">{stat.value}</p>
                 </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
+          <Card className="overflow-hidden">
+            <CardHeader className="flex flex-col gap-2 border-b bg-muted/40">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                Dernière dégustation
+                {lastTest && lastTest.favorite && (
+                  <Badge variant="secondary" className="flex items-center gap-1 text-xs">
+                    <Heart className="h-3 w-3 text-destructive" fill="currentColor" />
+                    Favori
+                  </Badge>
+                )}
+              </CardTitle>
+              <CardDescription>
+                {lastTest
+                  ? `${formatTestDate(lastTest.createdAt ?? lastTest.date)} • ${lastTest.machine} • ${lastTest.beverageType}`
+                  : "Aucun test n'a encore été enregistré."}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 p-6">
+              {lastTest ? (
+                <div className="space-y-5">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                      Café dégusté
+                    </span>
+                    <h3 className="text-2xl font-serif font-semibold">{lastTest.cafe}</h3>
+                  </div>
+                  <Separator />
+                  <div className="flex flex-wrap items-center gap-6">
+                    <div>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Note globale</span>
+                      <div className="mt-2 flex items-center gap-1 text-primary">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <Star
+                            key={i}
+                            className={
+                              i < lastTest.rating
+                                ? "h-5 w-5 fill-current"
+                                : "h-5 w-5 text-muted-foreground/40"
+                            }
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Type de boisson</span>
+                      <p className="mt-2 font-medium">{lastTest.beverageType}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Machine</span>
+                      <p className="mt-2 font-medium">{lastTest.machine}</p>
+                    </div>
+                  </div>
+                  {lastTest.comment && (
+                    <div className="rounded-xl border border-dashed border-border/60 bg-muted/30 p-4 text-sm italic text-muted-foreground">
+                      “{lastTest.comment}”
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="flex flex-col items-start gap-4 text-muted-foreground">
+                  <p>Commencez votre journal en ajoutant votre premier test.</p>
+                  <Link href="/tests/new">
+                    <Button size="sm" className="flex items-center gap-2">
+                      <PlusCircle className="h-4 w-4" />
+                      Créer un test
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </CardContent>
+            {lastTest && (
+              <CardFooter className="justify-end bg-muted/20">
+                <Link href={`/tests/${lastTest.id}`} passHref>
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    Voir le détail
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardFooter>
+            )}
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                Activité récente
+              </CardTitle>
+              <CardDescription>
+                Les trois dernières dégustations enregistrées.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {recentTests.length ? (
+                recentTests.map((test) => (
+                  <Link
+                    key={test.id}
+                    href={`/tests/${test.id}`}
+                    className="block rounded-xl border border-transparent bg-muted/30 p-4 transition hover:border-primary/40 hover:bg-background"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium">{test.cafe}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {formatTestDate(test.createdAt ?? test.date)} • {test.machine}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-1 text-primary">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <Coffee
+                            key={i}
+                            className={
+                              i < (test.rating ?? 0)
+                                ? "h-4 w-4"
+                                : "h-4 w-4 text-muted-foreground/40"
+                            }
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="rounded-xl border border-dashed border-border/60 bg-muted/20 p-6 text-sm text-muted-foreground">
+                  Vos dernières dégustations apparaîtront ici dès que vous aurez enregistré des tests.
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Link href="/tests">
+            <Card className="group h-full border-border/60 transition hover:border-primary/50 hover:shadow-md">
+              <CardContent className="flex h-full flex-col justify-between gap-6 p-6">
+                <div className="space-y-3">
+                  <TestTubeDiagonal className="h-8 w-8 text-primary" />
+                  <div>
+                    <h3 className="text-lg font-semibold">Historique des tests</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Parcourez l'ensemble de vos dégustations et suivez vos réglages.
+                    </p>
+                  </div>
+                </div>
+                <span className="text-sm font-medium text-primary">
+                  {tests.length} test{tests.length > 1 ? "s" : ""} enregistré{tests.length > 1 ? "s" : ""}
+                </span>
               </CardContent>
             </Card>
           </Link>
           <Link href="/coffees">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                <Coffee className="mb-2 text-primary" />
-                <div className="font-medium">Mes cafés</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {coffees.length} café{coffees.length > 1 ? "s" : ""}
+            <Card className="group h-full border-border/60 transition hover:border-primary/50 hover:shadow-md">
+              <CardContent className="flex h-full flex-col justify-between gap-6 p-6">
+                <div className="space-y-3">
+                  <MapPin className="h-8 w-8 text-amber-500" />
+                  <div>
+                    <h3 className="text-lg font-semibold">Bibliothèque de cafés</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Gardez une trace de vos origines, torréfactions et notes sensorielles.
+                    </p>
+                  </div>
                 </div>
+                <span className="text-sm font-medium text-amber-600">
+                  {coffees.length} café{coffees.length > 1 ? "s" : ""} référencé{coffees.length > 1 ? "s" : ""}
+                </span>
               </CardContent>
             </Card>
           </Link>
           <Link href="/machines">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                <ToolCase className="mb-2 text-secondary-foreground" />
-                <div className="font-medium">Mes machines</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {machines.length} machine{machines.length > 1 ? "s" : ""}
+            <Card className="group h-full border-border/60 transition hover:border-primary/50 hover:shadow-md">
+              <CardContent className="flex h-full flex-col justify-between gap-6 p-6">
+                <div className="space-y-3">
+                  <ToolCase className="h-8 w-8 text-secondary-foreground" />
+                  <div>
+                    <h3 className="text-lg font-semibold">Machines & moulins</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Archivez vos réglages pour reproduire vos extractions idéales.
+                    </p>
+                  </div>
                 </div>
+                <span className="text-sm font-medium text-secondary-foreground">
+                  {machines.length} machine{machines.length > 1 ? "s" : ""} suivie{machines.length > 1 ? "s" : ""}
+                </span>
               </CardContent>
             </Card>
           </Link>
           <Link href="/favorites">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="flex flex-col items-center justify-center p-4 text-center">
-                <Heart className="mb-2 text-primary" />
-                <div className="font-medium">Mes favoris</div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {tests.filter((test) => test.favorite).length} test
-                  {tests.filter((test) => test.favorite).length > 1 ? "s" : ""}
+            <Card className="group h-full border-border/60 transition hover:border-primary/50 hover:shadow-md">
+              <CardContent className="flex h-full flex-col justify-between gap-6 p-6">
+                <div className="space-y-3">
+                  <Heart className="h-8 w-8 text-destructive" />
+                  <div>
+                    <h3 className="text-lg font-semibold">Sélection favorites</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Retrouvez vos meilleures tasses et partagez vos coups de cœur.
+                    </p>
+                  </div>
                 </div>
+                <span className="text-sm font-medium text-destructive">
+                  {favoritesCount} test{favoritesCount > 1 ? "s" : ""} favori{favoritesCount > 1 ? "s" : ""}
+                </span>
               </CardContent>
             </Card>
           </Link>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
