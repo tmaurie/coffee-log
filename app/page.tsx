@@ -25,7 +25,6 @@ import {
   MapPin,
   PlusCircle,
   Sparkles,
-  Star,
   TestTubeDiagonal,
   TimerReset,
   ToolCase,
@@ -47,9 +46,7 @@ function DashboardHome() {
 
   const lastTest = tests.length ? tests[tests.length - 1] : null;
   const favoritesCount = tests.filter((test) => test.favorite).length;
-  const recentTests = [...tests]
-    .slice(-3)
-    .reverse();
+  const recentTests = [...tests].slice(-3).reverse();
 
   const stats = [
     {
@@ -84,15 +81,20 @@ function DashboardHome() {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 py-12">
         <section className="grid gap-6 rounded-3xl border border-border/50 bg-background/60 p-8 shadow-sm backdrop-blur md:grid-cols-[1.3fr,1fr]">
           <div className="space-y-6">
-            <Badge variant="secondary" className="w-fit uppercase tracking-wide">
+            <Badge
+              variant="secondary"
+              className="w-fit uppercase tracking-wide"
+            >
               Tableau de bord
             </Badge>
             <div className="space-y-3">
               <h1 className="text-3xl font-serif font-semibold md:text-4xl">
-                Ravie de vous retrouver sur <span className="text-primary">CaféLog</span>
+                Ravie de vous retrouver sur{" "}
+                <span className="text-primary">CaféLog</span>
               </h1>
               <p className="text-base text-muted-foreground md:text-lg">
-                Visualisez vos dernières extractions, gardez vos favoris à portée de main et lancez un nouveau test en un clin d'œil.
+                Visualisez vos dernières extractions, gardez vos favoris à
+                portée de main et lancez un nouveau test en un clin d'œil.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -103,7 +105,11 @@ function DashboardHome() {
                 </Button>
               </Link>
               <Link href="/tests">
-                <Button variant="outline" size="lg" className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="flex items-center gap-2"
+                >
                   <CalendarClock className="h-5 w-5" />
                   Historique complet
                 </Button>
@@ -135,12 +141,18 @@ function DashboardHome() {
 
         <section className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
           <Card className="overflow-hidden">
-            <CardHeader className="flex flex-col gap-2 border-b bg-muted/40">
+            <CardHeader className="flex flex-col gap-2  ">
               <CardTitle className="flex items-center gap-2 text-lg">
                 Dernière dégustation
                 {lastTest && lastTest.favorite && (
-                  <Badge variant="secondary" className="flex items-center gap-1 text-xs">
-                    <Heart className="h-3 w-3 text-destructive" fill="currentColor" />
+                  <Badge
+                    variant="secondary"
+                    className="flex items-center gap-1 text-xs"
+                  >
+                    <Heart
+                      className="h-3 w-3 text-destructive"
+                      fill="currentColor"
+                    />
                     Favori
                   </Badge>
                 )}
@@ -158,15 +170,19 @@ function DashboardHome() {
                     <span className="text-xs uppercase tracking-wide text-muted-foreground">
                       Café dégusté
                     </span>
-                    <h3 className="text-2xl font-serif font-semibold">{lastTest.cafe}</h3>
+                    <h3 className="text-2xl font-serif font-semibold">
+                      {lastTest.cafe}
+                    </h3>
                   </div>
                   <Separator />
                   <div className="flex flex-wrap items-center gap-6">
                     <div>
-                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Note globale</span>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                        Note globale
+                      </span>
                       <div className="mt-2 flex items-center gap-1 text-primary">
                         {Array.from({ length: 5 }, (_, i) => (
-                          <Star
+                          <Coffee
                             key={i}
                             className={
                               i < lastTest.rating
@@ -178,11 +194,17 @@ function DashboardHome() {
                       </div>
                     </div>
                     <div>
-                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Type de boisson</span>
-                      <p className="mt-2 font-medium">{lastTest.beverageType}</p>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                        Type de boisson
+                      </span>
+                      <p className="mt-2 font-medium">
+                        {lastTest.beverageType}
+                      </p>
                     </div>
                     <div>
-                      <span className="text-xs uppercase tracking-wide text-muted-foreground">Machine</span>
+                      <span className="text-xs uppercase tracking-wide text-muted-foreground">
+                        Machine
+                      </span>
                       <p className="mt-2 font-medium">{lastTest.machine}</p>
                     </div>
                   </div>
@@ -205,9 +227,13 @@ function DashboardHome() {
               )}
             </CardContent>
             {lastTest && (
-              <CardFooter className="justify-end bg-muted/20">
+              <CardFooter className="justify-end ">
                 <Link href={`/tests/${lastTest.id}`} passHref>
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
                     Voir le détail
                     <ArrowRight className="h-4 w-4" />
                   </Button>
@@ -237,7 +263,8 @@ function DashboardHome() {
                       <div className="space-y-1">
                         <p className="text-sm font-medium">{test.cafe}</p>
                         <p className="text-xs text-muted-foreground">
-                          {formatTestDate(test.createdAt ?? test.date)} • {test.machine}
+                          {formatTestDate(test.createdAt ?? test.date)} •{" "}
+                          {test.machine}
                         </p>
                       </div>
                       <div className="flex items-center gap-1 text-primary">
@@ -257,7 +284,8 @@ function DashboardHome() {
                 ))
               ) : (
                 <div className="rounded-xl border border-dashed border-border/60 bg-muted/20 p-6 text-sm text-muted-foreground">
-                  Vos dernières dégustations apparaîtront ici dès que vous aurez enregistré des tests.
+                  Vos dernières dégustations apparaîtront ici dès que vous aurez
+                  enregistré des tests.
                 </div>
               )}
             </CardContent>
@@ -271,14 +299,18 @@ function DashboardHome() {
                 <div className="space-y-3">
                   <TestTubeDiagonal className="h-8 w-8 text-primary" />
                   <div>
-                    <h3 className="text-lg font-semibold">Historique des tests</h3>
+                    <h3 className="text-lg font-semibold">
+                      Historique des tests
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Parcourez l'ensemble de vos dégustations et suivez vos réglages.
+                      Parcourez l'ensemble de vos dégustations et suivez vos
+                      réglages.
                     </p>
                   </div>
                 </div>
                 <span className="text-sm font-medium text-primary">
-                  {tests.length} test{tests.length > 1 ? "s" : ""} enregistré{tests.length > 1 ? "s" : ""}
+                  {tests.length} test{tests.length > 1 ? "s" : ""} enregistré
+                  {tests.length > 1 ? "s" : ""}
                 </span>
               </CardContent>
             </Card>
@@ -289,14 +321,18 @@ function DashboardHome() {
                 <div className="space-y-3">
                   <MapPin className="h-8 w-8 text-amber-500" />
                   <div>
-                    <h3 className="text-lg font-semibold">Bibliothèque de cafés</h3>
+                    <h3 className="text-lg font-semibold">
+                      Bibliothèque de cafés
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Gardez une trace de vos origines, torréfactions et notes sensorielles.
+                      Gardez une trace de vos origines, torréfactions et notes
+                      sensorielles.
                     </p>
                   </div>
                 </div>
                 <span className="text-sm font-medium text-amber-600">
-                  {coffees.length} café{coffees.length > 1 ? "s" : ""} référencé{coffees.length > 1 ? "s" : ""}
+                  {coffees.length} café{coffees.length > 1 ? "s" : ""} référencé
+                  {coffees.length > 1 ? "s" : ""}
                 </span>
               </CardContent>
             </Card>
@@ -307,14 +343,18 @@ function DashboardHome() {
                 <div className="space-y-3">
                   <ToolCase className="h-8 w-8 text-secondary-foreground" />
                   <div>
-                    <h3 className="text-lg font-semibold">Machines & moulins</h3>
+                    <h3 className="text-lg font-semibold">
+                      Machines & moulins
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Archivez vos réglages pour reproduire vos extractions idéales.
+                      Archivez vos réglages pour reproduire vos extractions
+                      idéales.
                     </p>
                   </div>
                 </div>
                 <span className="text-sm font-medium text-secondary-foreground">
-                  {machines.length} machine{machines.length > 1 ? "s" : ""} suivie{machines.length > 1 ? "s" : ""}
+                  {machines.length} machine{machines.length > 1 ? "s" : ""}{" "}
+                  suivie{machines.length > 1 ? "s" : ""}
                 </span>
               </CardContent>
             </Card>
@@ -325,14 +365,18 @@ function DashboardHome() {
                 <div className="space-y-3">
                   <Heart className="h-8 w-8 text-destructive" />
                   <div>
-                    <h3 className="text-lg font-semibold">Sélection favorites</h3>
+                    <h3 className="text-lg font-semibold">
+                      Sélection favorites
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Retrouvez vos meilleures tasses et partagez vos coups de cœur.
+                      Retrouvez vos meilleures tasses et partagez vos coups de
+                      cœur.
                     </p>
                   </div>
                 </div>
                 <span className="text-sm font-medium text-destructive">
-                  {favoritesCount} test{favoritesCount > 1 ? "s" : ""} favori{favoritesCount > 1 ? "s" : ""}
+                  {favoritesCount} test{favoritesCount > 1 ? "s" : ""} favori
+                  {favoritesCount > 1 ? "s" : ""}
                 </span>
               </CardContent>
             </Card>

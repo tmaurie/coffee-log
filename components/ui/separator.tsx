@@ -18,12 +18,13 @@ const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
     },
     ref,
   ) => {
-    const ariaOrientation = orientation === "vertical" ? "vertical" : "horizontal";
+    const ariaOrientation =
+      orientation === "vertical" ? "vertical" : "horizontal";
 
     return (
       <div
         ref={ref}
-        role={decorative ? role ?? "none" : role ?? "separator"}
+        role={decorative ? (role ?? "none") : (role ?? "separator")}
         aria-orientation={ariaOrientation}
         className={cn(
           "bg-border",
