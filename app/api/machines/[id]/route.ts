@@ -3,10 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/infra/db";
 import { NextResponse } from "next/server";
 
-export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } },
-) {
+export async function DELETE(_: Request, { params }: any) {
   try {
     await db.delete(machines).where(eq(machines.id, params.id));
     return NextResponse.json({ ok: true });
