@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { CafeLogProvider } from "@/context/CoffeeLogContext";
 import Header from "@/components/header";
 import BottomNav from "@/components/bottom-nav";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "CaféLog",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Header />
           <div className="pt-6 pb-12">{children}</div>
           <BottomNav />
+          <Toaster richColors={true} />
         </CafeLogProvider>
       </body>
     </html>

@@ -20,6 +20,7 @@ type CoffeeLogContext = {
   addTest: (test: Omit<Test, "id" | "userId">) => Promise<void>;
   addCoffee: (coffee: Omit<Coffee, "id">) => Promise<void>;
   addMachine: (machine: Omit<Machine, "id">) => Promise<void>;
+  deleteMachine: (id: string) => Promise<void>;
 };
 
 const CoffeeLogContext = createContext<CoffeeLogContext | undefined>(undefined);
@@ -86,6 +87,15 @@ const CafeLogProviderInner = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const deleteMachine = async (id: string) => {
+    const res = await fetch(`/api/machines/${id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      setMachines((prev) => prev.filter((machine) => machine.id !== id));
+    }
+  };
+
   const addTest = async (test: Omit<Test, "id" | "userId">) => {
     const res = await fetch("/api/tests", {
       method: "POST",
@@ -100,7 +110,15 @@ const CafeLogProviderInner = ({ children }: { children: ReactNode }) => {
 
   return (
     <CoffeeLogContext.Provider
-      value={{ tests, coffees, machines, addTest, addCoffee, addMachine }}
+      value={{
+        tests,
+        coffees,
+        machines,
+        addTest,
+        addCoffee,
+        addMachine,
+        deleteMachine,
+      }}
     >
       {children}
     </CoffeeLogContext.Provider>
